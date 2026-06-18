@@ -1,0 +1,76 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOUSCH — Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="brand-panel" aria-label="NOUSCH brand introduction">
+      <div class="steam"><i></i><i></i><i></i></div>
+      <div class="panel-top">
+        <div class="mark-mini">
+          <img src="{% static 'images/logo1.png' %}" alt="NOUSCH logo" />
+          <div><div class="mark-title">NOUSCH</div><div class="mark-sub">Café · Art · Cuisine</div></div>
+        </div>
+        <div class="mono">Lyon, France</div>
+      </div>
+      <div class="panel-center">
+        <div class="eyebrow">Member Access</div>
+        <h1 class="panel-title">Return to your<br><em>Parisian table.</em></h1>
+        <p class="panel-copy">Reserve your quiet corner, follow curated events, and keep your NOUSCH experience close — from morning espresso to evening gatherings.</p>
+        <div class="cafe-card">
+          <div><div class="metric">01</div><div class="metric-label">Private access</div></div>
+          <div><div class="metric">24h</div><div class="metric-label">Booking view</div></div>
+          <div><div class="metric">FR</div><div class="metric-label">Café culture</div></div>
+        </div>
+      </div>
+      <div class="panel-bottom">
+        <div class="mono address">contact@nousch.fr<br>© 2026 NOUSCH</div>
+        <nav class="socials mono" aria-label="Social links"><a href="#">Instagram</a><a href="#">TikTok</a></nav>
+      </div>
+    </section>
+
+    <section class="form-panel" aria-label="Login form">
+      <div class="auth-card">
+        <div class="mobile-logo"><img src="assets/nousch-b.png" alt="NOUSCH logo"><strong>NOUSCH</strong></div>
+        <div class="form-kicker">Secure Login</div>
+        <h2 class="form-title">Welcome back.</h2>
+        <p class="form-intro">Sign in with your email and password to continue to your NOUSCH account.</p>
+        <form method="post">
+          {% csrf_token %}  
+      <form class="auth-form" onsubmit="handleLogin(event)" novalidate>
+        {% csrf_token %}  
+        <div class="field" data-field="email">
+            <label for="email">Email address</label>
+            <div class="control"><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email"><span class="input-icon">@</span></div>
+            <div class="error-msg"></div>
+          </div>
+          <div class="field" data-field="password">
+            <label for="password">Password</label>
+            <div class="control"><input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password"><button class="password-toggle" type="button" onclick="togglePassword(this)">Show</button></div>
+            <div class="error-msg"></div>
+          </div>
+          <div class="form-row-small">
+            <label class="check"><input type="checkbox" name="remember"> Keep me signed in</label>
+            <a class="text-link" href="#">Forgot password?</a>
+          </div>
+          <button class="primary-btn" type="submit">Sign in</button>
+          <div class="toast" role="status"></div>
+        </form>
+        </form>
+        <div class="divider">or</div>
+        <p class="alt-action">New to NOUSCH? <a href="/register/">Create an account</a></p>
+     
+      </div>
+    </section>
+  </main>
+  <script src="{% static 'js/auth.js' %}"></script>
+</body>
+</html>

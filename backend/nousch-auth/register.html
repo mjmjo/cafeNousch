@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOUSCH — Create Account</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="brand-panel" aria-label="NOUSCH brand introduction">
+      <div class="steam"><i></i><i></i><i></i></div>
+      <div class="panel-top">
+        <div class="mark-mini">
+          <img src="assets/nousch-b.png" alt="NOUSCH logo" />
+          <div><div class="mark-title">NOUSCH</div><div class="mark-sub">Café · Art · Cuisine</div></div>
+        </div>
+        <div class="mono">Paris, France</div>
+      </div>
+      <div class="panel-center">
+        <div class="eyebrow">Join the house</div>
+        <h1 class="panel-title">Begin with<br><em>one perfect cup.</em></h1>
+        <p class="panel-copy">Create your NOUSCH account for reservations, private previews, curated menus, and early access to café events in France.</p>
+        <div class="cafe-card">
+          <div><div class="metric">☕</div><div class="metric-label">Coffee notes</div></div>
+          <div><div class="metric">🎨</div><div class="metric-label">Art events</div></div>
+          <div><div class="metric">🍽</div><div class="metric-label">Dining access</div></div>
+        </div>
+      </div>
+      <div class="panel-bottom">
+        <div class="mono address">contact@nousch.fr<br>© 2026 NOUSCH</div>
+        <nav class="socials mono" aria-label="Social links"><a href="#">Instagram</a><a href="#">TikTok</a></nav>
+      </div>
+    </section>
+
+    <section class="form-panel" aria-label="Registration form">
+      <div class="auth-card">
+        <div class="mobile-logo"><img src="assets/nousch-b.png" alt="NOUSCH logo"><strong>NOUSCH</strong></div>
+        <div class="form-kicker">Create Account</div>
+        <h2 class="form-title">Join NOUSCH.</h2>
+        <p class="form-intro">Register with your name, email, and password to unlock your personal café account.</p>
+        <form class="auth-form" onsubmit="handleRegister(event)" novalidate>
+          <div class="field-grid">
+            <div class="field" data-field="firstName">
+              <label for="firstName">First name</label>
+              <div class="control"><input id="firstName" name="firstName" type="text" placeholder="Camille" autocomplete="given-name"><span class="input-icon">FN</span></div>
+              <div class="error-msg"></div>
+            </div>
+            <div class="field" data-field="lastName">
+              <label for="lastName">Last name</label>
+              <div class="control"><input id="lastName" name="lastName" type="text" placeholder="Laurent" autocomplete="family-name"><span class="input-icon">LN</span></div>
+              <div class="error-msg"></div>
+            </div>
+          </div>
+          <div class="field" data-field="email">
+            <label for="email">Email address</label>
+            <div class="control"><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email"><span class="input-icon">@</span></div>
+            <div class="error-msg"></div>
+          </div>
+          <div class="field" data-field="password">
+            <label for="password">Password</label>
+            <div class="control"><input id="password" name="password" type="password" placeholder="Minimum 8 characters" autocomplete="new-password"><button class="password-toggle" type="button" onclick="togglePassword(this)">Show</button></div>
+            <div class="error-msg"></div>
+          </div>
+          <div class="field" data-field="confirmPassword">
+            <label for="confirmPassword">Repeat password</label>
+            <div class="control"><input id="confirmPassword" name="confirmPassword" type="password" placeholder="Repeat your password" autocomplete="new-password"><button class="password-toggle" type="button" onclick="togglePassword(this)">Show</button></div>
+            <div class="error-msg"></div>
+          </div>
+          <button class="primary-btn" type="submit">Create account</button>
+          <div class="toast" role="status"></div>
+        </form>
+        <p class="privacy-note">By creating an account, you agree to NOUSCH terms and privacy policy.</p>
+        <div class="divider">or</div>
+        <p class="alt-action">Already have an account? <a href="login.html">Sign in</a></p>
+      </div>
+    </section>
+  </main>
+  <script src="auth.js"></script>
+</body>
+</html>

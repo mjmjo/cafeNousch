@@ -1,0 +1,419 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Reem+Kufi+Fun:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Reem+Kufi+Fun:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="title">Café Nousch</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+</head>
+
+<div class="section-divider"></div>
+<body>
+  <div class="welcome-screen" id="welcomeScreen">
+
+
+</div>
+<div class="persian-border"></div>
+</div>
+
+  
+<link href="https://fonts.cdnfonts.com/css/irannastaliq" rel="stylesheet">
+  </div>
+<!-- Navbar -->
+ <header class="hero-header">
+
+  <nav class="navbar">
+    
+    <div class="nav-logo">
+      <img src="{% static 'images/logo1.png' %}" alt='Logo'>
+    </div>
+
+    <div class="nav-links">
+      <a href="#">Accueil</a>
+      <a href="#">Notre Histoire</a>
+      
+       <div class="dropdown">
+      <a href="#">Menu</a>
+
+      <div class="mega-menu">
+        <div class="mega-column">
+          <h4>THÉS</h4>
+          <a href="#">Thé Noir</a>
+          <a href="#">Thé Vert</a>
+          <a href="#">Thé Safran</a>
+          <a href="#">Infusions</a>
+         
+        </div>
+
+        <div class="mega-column">
+          
+          <h4>PÂTISSERIES</h4>
+          <a href="#">Baklava</a>
+          <a href="#">Cheesecake</a>
+          <a href="#">Croissant</a>
+          <a href="#">Macarons</a>
+          <a href="#">Desserts Persans</a>
+        </div>
+        <div class="mega-column">
+           <h4>Boissons Fraiches</h4>
+         </div>
+
+        <div class="mega-column">
+          <h4>SPÉCIALITÉS</h4>
+          <a href="#">Petit Déjeuner</a>
+          <a href="#">Brunch</a>
+          <a href="#">Déjeuner</a>
+          <a href="#">Cocktails Sans Alcool</a>
+          <a href="#">Signature Nousch</a>
+        </div>
+
+        <div class="mega-images">
+          <div class="mega-card">
+           <!--<img "{% static tea1.png" alt="">--> 
+            <h5>Thé Signature</h5>
+            <p>Notre sélection raffinée</p>
+          </div>
+
+          <div class="mega-card">
+            <!--<img src="tea11.png" alt="">-->
+            <h5>Desserts</h5>
+            <p>Douceurs artisanales</p>
+          </div>
+
+          <div class="mega-card">
+           <!-- <img src="tea1.png" alt="">-->
+            <h5>Brunch</h5>
+            <p>Moments gourmands</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <a href="#">Boutique</a>
+      
+      <a href="#">Galerie</a>
+      <a href="#">Contact</a>
+    </div>
+
+<div class="top-search">
+  <button class="search-toggle">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+
+  <div class="search-panel">
+    <input type="text" placeholder="Tea, infusion, boutique..." />
+    <button class="search-btn">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+</div>
+ 
+
+      
+   
+     
+    </button>
+
+   <div class="top-right">
+  
+  <!-- Language -->
+  <div class="lang">
+    <div class="lang-btn">
+      🌐 <span id="current-lang">FR</span>
+    </div>
+
+    <div class="lang-dropdown">
+      <div onclick="changeLang('FR')">🇫🇷 FR</div>
+      <div onclick="changeLang('EN')">🇬🇧 EN</div>
+      <div onclick="changeLang('DE')">🇩🇪 DE</div>
+      <div onclick="changeLang('FA')">🇮🇷 FA</div>
+    </div>
+  </div>
+
+  <!-- Login -->
+
+<!-- دکمه لاگین -->
+<!--<div class="login-btn" id="loginBtn">👤</div>-->
+
+
+<div class="account">
+{% if user.is_authenticated %}
+<div class="account-icon">
+<a href=""class="account-icon" id="loginBtn">👤</a>
+{{user.first_name}}
+</div>
+
+<div class="account-dropdown">
+  <a href="{% url 'account' %}">
+            📅Mes Reservations
+        </a>
+
+    <a href="#">
+            🛒Mes commandes
+        </a>
+
+        <a href="#">
+            ⚙️Modifier
+        </a>
+
+        <a href="{% url 'logout' %}">
+            🚪 Sortir
+        </a>
+</a>
+{%else%}
+<a href="/login/",class="account-icon" id="loginBtn">👤</a>
+{%endif %}
+
+</div>
+
+</div>
+
+
+</div>
+<!-- مودال -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+
+    <span class="close" id="closeBtn">&times;</span>
+
+ 
+
+  
+      
+  </div>
+</div>
+
+  
+
+  </nav>
+ 
+
+  <section class="hero-section">
+
+    <div class="hero-content">
+      <span class="hero-subtitle">Café & Tea Experience</span>
+      <h1 class="h1-hero" >Bienvenue au Café Nousch</h1>
+      <p>
+        Découvrez une ambiance chaleureuse, des thés raffinés
+        et une expérience unique inspirée par l’art Persan.
+      </p>
+    </div>   
+    
+ <div class="content">
+   <div class="nav-actions">
+        <img src="{% static 'images/logo1.png' %}" class='image-hero1'>
+      </div>  
+
+    <!--<img src="{% static 'images/tea11.png' class='coffee-img' %}">-->
+  
+  </div>
+
+
+  <!--<div class="steam"></div>
+    <div class="steam"></div>
+  <div class="steam"></div>-->
+
+  <!-- Steam -->
+
+  <!-- Steam -->
+ 
+  </div>
+</div>
+
+      <div class="hero-buttons">
+        <a href="/menu/" class="btn-primary">Découvrir</a>
+        <!--<a href="/re/" class="reservation-btn">Réserver une table</a>-->
+        <a href="/re/" class="btn-primary">Réserver une table</a>
+      </div>
+    </div>
+  </section>
+
+</header>
+
+
+</div>
+</div>
+
+</div>
+</div>
+    <!-- تصویر مرکزی 
+       <div class="hero-right">
+
+  <img src="paris.jpg" class="eiffel active">
+  <img src="paris2.jpg" class="eiffel">
+  <img src="paris5.jpg" class="eiffel">
+  <img src="imag.png" class="eiffel">
+  <img src="paris7.jpg" class="eiffel">
+  <img src="paris8.jpg" class="eiffel">
+
+  
+
+</div>-->
+
+
+<!-- About Section Placeholder -->
+<div class="story-image-slider">
+  <img src="{% static 'images/chay.jpg'%}" class='story-slide active' alt='Notre Histoire 1'>
+  <img src="{% static 'images/paris.jpg'%}" class='story-slide' alt='Notre Histoire 2'>
+  <img src="{% static 'images/paris2.jpg'%}" class='story-slide' alt='Notre Histoire 3'>
+
+</div>
+
+
+  </div>
+</section>
+
+<!-- Menu Section Placeholder -->
+<section id="menu" class="menu-section">
+  <div class="container"><br>
+    <h2>Menu</h2>
+  
+    <div class="qr-code">
+      <!--<h2>Menu</h2>-->
+     <div class="menu-frame">
+ <iframe src="menu/" frameborder="0"></iframe>
+
+     </div>
+      <!--<p>Scannez pour accéder au menu complet</p>-->
+    </div>
+    <div class="menu-items"></div>
+  </div>
+</section>
+
+<!-- Blog Section Placeholder -->
+<section id="blog" class="blog-section">
+  <div class="container">
+    <h2>Blog</h2>
+    <p>Articles et actualités du café</p>
+  </div>
+</section>
+
+<!-- Boutique Section Placeholder -->
+<section class="boutique-section">
+  <h2 class="boutique-title">Boutique</h2>
+
+  <div class="boutique-grid">
+{%for mahsol in products %}
+    <div class="product-card">
+      <img class="image-botic" src="{{ mahsol.image.url }}",with="100px">
+      <a href="Nosche/{{mahsol.id}}/">
+      <h2>{{mahsol.name}}</h2>
+      
+      </a>
+      <p>{{mahsol.description}}</p>
+      <h3>{{mahsol.price}}$</h3>
+    
+  
+        <div class="product-bottom">
+          <input type="number" value="1" min="1">
+          <button>Ajouter</button>
+        </div>
+      </div>
+    
+   
+{% endfor %}
+</section>
+
+<!-- Reservation Section Placeholder -->
+<section id="reservation" class="reservation-section">
+ 
+  <div class="container">
+    <h2>Réservation & Commande</h2>
+    <div class="reservation-card">
+      <h3>Réserver une table</h3>
+      <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Votre nom" required>
+        <input type="text" name="phone" placeholder="Votre numéro" required>
+        <input type="date" name="date" required>
+        <input type="time" name="time" required>
+        <input type="number" name="guests" placeholder="Nombre de personnes" required>
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+
+    <div class="reservation-card">
+      <h3>Commander du café</h3>
+      <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Votre nom" required>
+        <input type="text" name="phone" placeholder="Votre numéro" required>
+        <select name="coffee_type">
+          <option value="espresso">Espresso</option>
+          <option value="latte">Latte</option>
+          <option value="cappuccino">Cappuccino</option>
+        </select>
+        <input type="number" name="quantity" placeholder="Quantité" required>
+        <textarea name="note" placeholder="Notes supplémentaires"></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+  </div>
+</section>
+<script src="{% static 'js/slider.js' %}">
+
+</script>
+<footer class="site-footer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <div class="footer-container">
+
+    <div class="footer-column">
+      <h3>CAFÉ NOUSCH</h3>
+      <a href="#">Notre Histoire</a>
+      <a href="#">Notre Menu</a>
+      <a href="#">Réservation</a>
+      <a href="#">Boutique</a>
+      <a href="#">Galerie</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>BOUTIQUE</h3>
+      <a href="#">Thés</a>
+      <a href="#">Infusions</a>
+      <a href="#">Tasses</a>
+      <a href="#">Cadeaux</a>
+      <a href="#">Collections</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>À PROPOS</h3>
+      <a href="#">Contact</a>
+      <a href="#">FAQ</a>
+      <a href="#">Livraison</a>
+      <a href="#">Politique de confidentialité</a>
+      <a href="#">Conditions générales</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Suivez-nous</h3>
+
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+        <a href="https://www.instagram.com/nousch.fr?igsh=cmc5bXc5OW45M2gy"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Café Nousch — Tous droits réservés</p>
+  </div>
+</footer>
+</body>
+</html>
+

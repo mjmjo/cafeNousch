@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نوش · Nousch – Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pomegranate: #9E1B32;
+      --lapis:       #1F3A6F;
+      --lapis-dark:  #162B55;
+      --dusty-blue:  #5E7F99;
+      --saffron:     #C7A24B;
+      --sage:        #8EADBC;
+      --cream:       #F5F0E8;
+      --ivory:       #FAF7F0;
+      --ink:         #2A1F1A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--lapis-dark);
+      background-image:
+        radial-gradient(ellipse at 15% 15%, rgba(94,127,153,0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 85%, rgba(158,27,50,0.14) 0%, transparent 50%);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+    }
+    .page-bg { min-height: 100vh; padding: 2rem 1rem 4rem; position: relative; }
+    .page-bg::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg,   rgba(199,162,75,0.04) 0, transparent 1px, transparent 49px, rgba(199,162,75,0.04) 50px),
+        repeating-linear-gradient(90deg,  rgba(199,162,75,0.04) 0, transparent 1px, transparent 49px, rgba(199,162,75,0.04) 50px);
+      pointer-events: none; z-index: 0;
+    }
+    .page { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+
+    /* HEADER */
+    .header-card {
+      background: var(--lapis);
+      border-radius: 6px;
+      margin-bottom: 1.4rem;
+      overflow: hidden;
+      box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .header-top-band {
+      height: 14px;
+      background: repeating-linear-gradient(90deg,
+        var(--pomegranate) 0, var(--pomegranate) 20px,
+        var(--saffron)     20px, var(--saffron)     40px,
+        var(--dusty-blue)  40px, var(--dusty-blue)  60px,
+        var(--saffron)     60px, var(--saffron)     80px
+      );
+      opacity: 0.9;
+    }
+    .header-bottom-band { height: 14px; background: repeating-linear-gradient(90deg, var(--pomegranate) 0,var(--pomegranate) 20px,var(--saffron) 20px,var(--saffron) 40px,var(--dusty-blue) 40px,var(--dusty-blue) 60px,var(--saffron) 60px,var(--saffron) 80px); opacity: 0.9; }
+    .header-inner {
+      text-align: center;
+      padding: 2.5rem 2rem 2.2rem;
+      position: relative;
+    }
+    /* Geometric tile bg in header */
+    .header-inner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 25px 25px, rgba(199,162,75,0.08) 2px, transparent 2px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+    /* Corner ornaments */
+    .corner { position: absolute; width: 60px; height: 60px; }
+    .corner svg { width: 100%; height: 100%; }
+    .corner.tl { top: 14px; left: 0; }
+    .corner.tr { top: 14px; right: 0; transform: scaleX(-1); }
+    .corner.bl { bottom: 14px; left: 0; transform: scaleY(-1); }
+    .corner.br { bottom: 14px; right: 0; transform: scale(-1); }
+
+    .arch-logo { display: inline-block; margin-bottom: 1rem; }
+    .arch-logo svg { width: 68px; height: 84px; display: block; margin: 0 auto; }
+
+    .brand-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.28em;
+      line-height: 1;
+      position: relative;
+    }
+    .brand-sub {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--saffron);
+      letter-spacing: 0.09em;
+      margin-top: 0.4rem;
+      display: block;
+      opacity: 0.9;
+    }
+    .hd {
+      display: flex; align-items: center; gap: 0.6rem;
+      justify-content: center; margin: 0.9rem 0 0.5rem;
+    }
+    .hd::before, .hd::after {
+      content: ''; flex: 1; max-width: 80px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(199,162,75,0.5));
+    }
+    .hd::after { background: linear-gradient(90deg, rgba(199,162,75,0.5), transparent); }
+    .hd span { color: var(--saffron); font-size: 0.85rem; letter-spacing: 0.3em; }
+    .tagline { font-size: 0.9rem; color: rgba(255,255,255,0.55); font-style: italic; letter-spacing: 0.05em; }
+
+    /* TAB NAV */
+    .tab-nav { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; margin-bottom: 1.5rem; }
+    .tab-btn {
+      font-family: 'Cinzel', serif; font-size: 0.67rem;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      border: 1.5px solid rgba(199,162,75,0.4);
+      background: rgba(31,58,111,0.55); color: rgba(255,255,255,0.7);
+      padding: 0.55rem 1.1rem; cursor: pointer; border-radius: 3px;
+      transition: all 0.22s; backdrop-filter: blur(4px);
+    }
+    .tab-btn:hover { background: rgba(199,162,75,0.18); border-color: var(--saffron); color: var(--saffron); }
+    .tab-btn.active { background: var(--saffron); color: var(--lapis-dark); border-color: var(--saffron); font-weight: 600; box-shadow: 0 3px 14px rgba(199,162,75,0.4); }
+
+    /* SECTIONS */
+    .menu-section { display: none; animation: fu 0.35s ease forwards; }
+    .menu-section.active { display: block; }
+    @keyframes fu { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+    /* MENU CARD */
+    .menu-card {
+      background: var(--ivory);
+      border-radius: 5px;
+      box-shadow: 0 10px 48px rgba(0,0,0,0.5);
+      overflow: hidden;
+      margin-bottom: 1.4rem;
+    }
+
+    /* Card header band – mimics Persian tile border */
+    .card-head {
+      background: var(--lapis);
+      padding: 0.85rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; overflow: hidden;
+    }
+    .card-head::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(90deg,rgba(199,162,75,0) 0,rgba(199,162,75,0) 38px,rgba(199,162,75,0.14) 39px,rgba(199,162,75,0) 40px);
+      pointer-events: none;
+    }
+    .card-head-label { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.22em; color:rgba(199,162,75,0.75); text-transform:uppercase; }
+    .card-head-gem { color:rgba(199,162,75,0.55); font-size:0.85rem; }
+    .card-head-fa { font-family:'IM Fell English',serif; font-style:italic; color:rgba(255,255,255,0.4); font-size:0.85rem; }
+
+    /* Tile border strip below card-head */
+    .card-tile-strip {
+      height: 10px;
+      background: repeating-linear-gradient(90deg,
+        var(--pomegranate) 0, var(--pomegranate) 12px,
+        var(--saffron)    12px, var(--saffron)    24px,
+        var(--dusty-blue) 24px, var(--dusty-blue) 36px,
+        var(--saffron)    36px, var(--saffron)    48px
+      );
+      opacity: 0.55;
+    }
+
+    .card-inner { padding: 1.8rem 2rem 1.6rem; position: relative; }
+    /* Subtle tile watermark in card body */
+    .card-inner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 30px 30px, rgba(31,58,111,0.04) 2px, transparent 2px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .card-tile-strip-bottom { height: 10px; background: repeating-linear-gradient(90deg,var(--pomegranate) 0,var(--pomegranate) 12px,var(--saffron) 12px,var(--saffron) 24px,var(--dusty-blue) 24px,var(--dusty-blue) 36px,var(--saffron) 36px,var(--saffron) 48px); opacity: 0.55; }
+    .card-foot { background:var(--lapis); padding: 0.6rem 2rem; text-align:center; }
+    .card-foot-dots { color: rgba(199,162,75,0.5); font-size:0.75rem; letter-spacing:0.4em; }
+
+    /* SECTION TITLE */
+    .section-title-wrap { text-align: center; margin-bottom: 1.4rem; position: relative; }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+      font-weight: 700; color: var(--pomegranate);
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .title-orn {
+      display: flex; align-items: center; gap: 0.5rem;
+      justify-content: center; margin-top: 0.55rem;
+    }
+    .title-orn::before, .title-orn::after {
+      content: ''; flex: 1; max-width: 70px; height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--saffron));
+    }
+    .title-orn::after { background: linear-gradient(90deg, var(--saffron), transparent); }
+    .title-orn span { color: var(--saffron); font-size: 0.5rem; letter-spacing: 0.25em; }
+
+    /* SUB LABELS */
+    .sub-label {
+      font-family: 'Cinzel', serif; font-size: 0.63rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--dusty-blue);
+      border-bottom: 1px solid rgba(94,127,153,0.25);
+      padding-bottom: 0.3rem; margin: 1.2rem 0 0.7rem;
+    }
+
+    /* MENU ITEMS */
+    .menu-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(199,162,75,0.13);
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .item-icon { flex-shrink:0; width:20px; height:20px; margin-top:3px; opacity:0.65; }
+    .item-text { flex: 1; }
+    .item-name { font-size: 1.05rem; font-weight: 500; color: var(--lapis); line-height: 1.25; }
+    .item-desc { font-size: 0.84rem; font-style: italic; color: var(--dusty-blue); margin-top: 0.1rem; line-height: 1.4; opacity: 0.88; }
+    .item-price {
+      flex-shrink: 0; font-family: 'Cinzel', serif;
+      font-size: 0.98rem; color: var(--saffron); font-weight: 600;
+      white-space: nowrap; padding-top: 2px;
+    }
+    .item-price::after { content: ' €'; font-size: 0.7rem; color: var(--dusty-blue); font-weight: 400; }
+
+    /* FULL MENU section dividers */
+    .section-label-full {
+      font-family: 'Cinzel', serif; font-size: 0.7rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--saffron); margin: 1.8rem 0 0.7rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .section-label-full::after { content:''; flex:1; height:1px; background:rgba(199,162,75,0.28); }
+
+    /* FOOTER */
+    footer { text-align:center; padding:1.8rem 1rem; font-size:0.83rem; color:rgba(255,255,255,0.4); font-style:italic; letter-spacing:0.05em; }
+    footer .fm { display:block; color:var(--saffron); font-size:1rem; margin-bottom:0.45rem; opacity:0.6; letter-spacing:0.5em; }
+
+    @media (max-width:520px) {
+      .card-inner { padding:1.4rem 1.1rem 1.2rem; }
+      .item-name { font-size:0.95rem; }
+      .item-desc { font-size:0.8rem; }
+      .card-head { padding:0.75rem 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-bg">
+<div class="page">
+
+  <!-- Reusable SVG icons (hidden) -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-tea" viewBox="0 0 24 24"><path fill="var(--dusty-blue)" d="M20 3H4v10c0 2.2 1.8 4 4 4h6c2.2 0 4-1.8 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path fill="var(--dusty-blue)" d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 4-5 8z"/></symbol>
+    <symbol id="i-drink" viewBox="0 0 24 24"><path fill="var(--dusty-blue)" d="M7 2l-2 8h14L17 2H7zm-2.5 9C3.1 11 2 12.1 2 13.5V22h20v-8.5C22 12.1 20.9 11 19.5 11h-15zM12 20c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/></symbol>
+    <symbol id="i-plate" viewBox="0 0 24 24"><path fill="var(--dusty-blue)" d="M11 9H9V2H7v7H5V2H3v7c0 2.1 1.4 3.8 3.3 4.4V22h2.3v-8.6C10.6 12.8 12 11 12 9V2h-1v7zm5-3v8h2.5v8H21V2c-2.8 0-5 2.2-5 4z"/></symbol>
+    <symbol id="i-cake" viewBox="0 0 24 24"><path fill="var(--dusty-blue)" d="M12 6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm8 2H4c-1.1 0-2 .9-2 2v1l2 10h16l2-10V10c0-1.1-.9-2-2-2zM6 17H4.4l-1.2-6H6v6zm5 0H9v-6h2v6zm4 0h-2v-6h2v6zm4 0h-2v-6h2.8L18 17z"/></symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24"><path fill="var(--dusty-blue)" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></symbol>
+  </svg>
+
+  <!-- Corner ornament template -->
+  <svg style="display:none">
+    <symbol id="corner-orn" viewBox="0 0 60 60">
+      <path d="M4,4 L30,4 Q40,4 40,14 L40,30" fill="none" stroke="rgba(199,162,75,0.55)" stroke-width="1.5"/>
+      <path d="M4,4 L4,30 Q4,40 14,40 L30,40" fill="none" stroke="rgba(199,162,75,0.35)" stroke-width="0.8"/>
+      <circle cx="4" cy="4" r="4" fill="rgba(199,162,75,0.5)"/>
+      <circle cx="4" cy="4" r="7" fill="none" stroke="rgba(199,162,75,0.25)" stroke-width="1"/>
+    </symbol>
+  </svg>
+
+  <!-- ════ HEADER ════ -->
+  <div class="header-card">
+    <div class="header-top-band"></div>
+    <div class="header-inner">
+      <!-- Corners -->
+      <div class="corner tl"><svg><use href="#corner-orn"/></svg></div>
+      <div class="corner tr"><svg><use href="#corner-orn"/></svg></div>
+      <div class="corner bl"><svg><use href="#corner-orn"/></svg></div>
+      <div class="corner br"><svg><use href="#corner-orn"/></svg></div>
+
+      <!-- Arch logo -->
+      <div class="arch-logo">
+        <svg viewBox="0 0 68 84" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6,80 L6,40 Q6,6 34,6 Q62,6 62,40 L62,80 Z" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2.5"/>
+          <path d="M12,80 L12,41 Q12,14 34,14 Q56,14 56,41 L56,80 Z" fill="none" stroke="rgba(199,162,75,0.65)" stroke-width="1.2"/>
+          <circle cx="34" cy="6" r="5" fill="var(--saffron)"/>
+          <circle cx="34" cy="6" r="2.5" fill="white"/>
+          <g transform="translate(34,48)" fill="rgba(255,255,255,0.75)">
+            <polygon points="0,-9 2.5,-3.5 9,-8.5 4.5,-2.5 10.5,0 4.5,2.5 9,8.5 2.5,3.5 0,9 -2.5,3.5 -9,8.5 -4.5,2.5 -10.5,0 -4.5,-2.5 -9,-8.5 -2.5,-3.5"/>
+          </g>
+          <line x1="2" y1="80" x2="66" y2="80" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <h1 class="brand-name">NOUSCH</h1>
+      <span class="brand-sub">نوش · Café Persan &amp; Herbal</span>
+      <div class="hd"><span>✦ ✦ ✦</span></div>
+      <p class="tagline">Saveurs de Perse, chaleur d'un café</p>
+    </div>
+    <div class="header-bottom-band"></div>
+  </div>
+
+  <!-- ════ TABS ════ -->
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" onclick="showTab('chaud',this)"   role="tab">☕ Bar Chaud</button>
+    <button class="tab-btn"        onclick="showTab('froid',this)"   role="tab">🧊 Bar Froid</button>
+    <button class="tab-btn"        onclick="showTab('resto',this)"   role="tab">🫕 Restauration</button>
+    <button class="tab-btn"        onclick="showTab('patiss',this)"  role="tab">🍮 Pâtisseries</button>
+    <button class="tab-btn"        onclick="showTab('complet',this)" role="tab">📜 Menu Complet</button>
+  </nav>
+
+  <!-- Macro for card head (inlined per section) -->
+
+  <!-- ════ BAR CHAUD ════ -->
+  <section id="tab-chaud" class="menu-section active">
+    <div class="menu-card">
+      <div class="card-head"><span class="card-head-label">Nousch · Menu</span><span class="card-head-gem">✦</span><span class="card-head-fa">نوش</span></div>
+      <div class="card-tile-strip"></div>
+      <div class="card-inner">
+        <div class="section-title-wrap">
+          <div class="section-title">☕ Bar Chaud</div>
+          <div class="title-orn"><span>◆ ◆ ◆</span></div>
+        </div>
+        <div class="sub-label">Cafés &amp; Chocolat</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-tea"/></svg><div class="item-text"><div class="item-name">Espresso</div><div class="item-desc">Espresso italien classique</div></div><div class="item-price">2,40</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-tea"/></svg><div class="item-text"><div class="item-name">Americano</div><div class="item-desc">Espresso allongé à l'eau chaude</div></div><div class="item-price">3,20</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-tea"/></svg><div class="item-text"><div class="item-name">Cappuccino</div><div class="item-desc">Espresso avec mousse de lait</div></div><div class="item-price">4,20</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-tea"/></svg><div class="item-text"><div class="item-name">Latte</div><div class="item-desc">Espresso avec lait chaud crémeux</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-tea"/></svg><div class="item-text"><div class="item-name">Chocolat Chaud</div><div class="item-desc">Chocolat chaud onctueux</div></div><div class="item-price">4,80</div></div>
+        <div class="sub-label">Thés Persans</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Thé Noir Persan</div><div class="item-desc">Thé noir infusé traditionnel</div></div><div class="item-price">2,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Thé au Sucre Candi <em>(Nabat)</em></div><div class="item-desc">Thé persan avec sucre candi</div></div><div class="item-price">3,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Thé au Safran</div><div class="item-desc">Thé parfumé au safran</div></div><div class="item-price">3,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Thé à la Cardamome</div><div class="item-desc">Thé noir parfumé à la cardamome</div></div><div class="item-price">3,20</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Thé à la Cannelle</div><div class="item-desc">Thé noir à la cannelle</div></div><div class="item-price">3,20</div></div>
+        <div class="sub-label">Infusions &amp; Tisanes</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Infusion à la Menthe</div><div class="item-desc">Menthe séchée</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Infusion Verveine</div><div class="item-desc">Verveine citronnée</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Infusion Bourrache</div><div class="item-desc">Fleur de bourrache relaxante</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Infusion Relax</div><div class="item-desc">Mélange de plantes calmantes</div></div><div class="item-price">4,80</div></div>
+      </div>
+      <div class="card-tile-strip-bottom"></div>
+      <div class="card-foot"><span class="card-foot-dots">✦ &nbsp; ✦ &nbsp; ✦</span></div>
+    </div>
+  </section>
+
+  <!-- ════ BAR FROID ════ -->
+  <section id="tab-froid" class="menu-section">
+    <div class="menu-card">
+      <div class="card-head"><span class="card-head-label">Nousch · Menu</span><span class="card-head-gem">✦</span><span class="card-head-fa">نوش</span></div>
+      <div class="card-tile-strip"></div>
+      <div class="card-inner">
+        <div class="section-title-wrap">
+          <div class="section-title">🧊 Bar Froid</div>
+          <div class="title-orn"><span>◆ ◆ ◆</span></div>
+        </div>
+        <div class="sub-label">Boissons Classiques</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Eau Minérale</div><div class="item-desc">Eau plate ou gazeuse</div></div><div class="item-price">2,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Soda</div><div class="item-desc">Coca / soda classique</div></div><div class="item-price">2,80</div></div>
+        <div class="sub-label">Sirops Persans</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sirop de Griotte</div><div class="item-desc">Boisson persane à la griotte</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sirop Citron</div><div class="item-desc">Boisson citron fraîche</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sirop Fleur d'Oranger</div><div class="item-desc">Boisson parfumée à la fleur d'oranger</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sirop Sekanjabin</div><div class="item-desc">Sirop persan menthe &amp; vinaigre</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sirop Bidmeshk</div><div class="item-desc">Sirop traditionnel persan</div></div><div class="item-price">4,80</div></div>
+        <div class="sub-label">Spécialités Glacées</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Jus de Carotte Glacé</div><div class="item-desc">Jus de carotte avec glace</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Carotte Glacée <em>(Bastani)</em></div><div class="item-desc">Jus de carotte avec glace au safran</div></div><div class="item-price">5,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Milkshakes Maison</div><div class="item-desc">Différents parfums</div></div><div class="item-price">5,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Mocktails Maison</div><div class="item-desc">Cocktails sans alcool</div></div><div class="item-price">6,50</div></div>
+      </div>
+      <div class="card-tile-strip-bottom"></div>
+      <div class="card-foot"><span class="card-foot-dots">✦ &nbsp; ✦ &nbsp; ✦</span></div>
+    </div>
+  </section>
+
+  <!-- ════ RESTAURATION ════ -->
+  <section id="tab-resto" class="menu-section">
+    <div class="menu-card">
+      <div class="card-head"><span class="card-head-label">Nousch · Menu</span><span class="card-head-gem">✦</span><span class="card-head-fa">نوش</span></div>
+      <div class="card-tile-strip"></div>
+      <div class="card-inner">
+        <div class="section-title-wrap">
+          <div class="section-title">🫕 Petite Restauration</div>
+          <div class="title-orn"><span>◆ ◆ ◆</span></div>
+        </div>
+        <div class="sub-label">Plats Persans</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Kuku Sabzi</div><div class="item-desc">Omelette persane aux herbes</div></div><div class="item-price">9,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Kuku Sibzamini</div><div class="item-desc">Omelette persane aux pommes de terre</div></div><div class="item-price">9,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Sandwich Langue de Bœuf</div><div class="item-desc">Sandwich de langue de bœuf</div></div><div class="item-price">10,90</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Langue de Bœuf Mijotée</div><div class="item-desc">Plat de langue de bœuf</div></div><div class="item-price">10,90</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Saucisse Bandari</div><div class="item-desc">Saucisse épicée persane</div></div><div class="item-price">10,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Kotlet Persan</div><div class="item-desc">Galette de viande et pommes de terre</div></div><div class="item-price">9,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Mirza Ghasemi</div><div class="item-desc">Aubergines fumées, ail et œuf</div></div><div class="item-price">9,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Kashk Bademjan</div><div class="item-desc">Aubergines au yaourt fermenté</div></div><div class="item-price">9,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Falafel</div><div class="item-desc">Falafels avec sauce maison</div></div><div class="item-price">9,00</div></div>
+        <div class="sub-label">Accompagnements &amp; Salades</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Frites</div><div class="item-desc">Pommes de terre frites</div></div><div class="item-price">5,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Borani Aubergine</div><div class="item-desc">Yaourt et aubergine</div></div><div class="item-price">6,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Borani Épinard</div><div class="item-desc">Yaourt et épinard</div></div><div class="item-price">6,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Mast-o-Khiar</div><div class="item-desc">Yaourt au concombre et menthe</div></div><div class="item-price">6,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Salade Olivier Persane</div><div class="item-desc">Salade de pommes de terre et poulet</div></div><div class="item-price">8,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Salade Shirazi</div><div class="item-desc">Concombre, tomate, citron</div></div><div class="item-price">6,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Salade de Saison</div><div class="item-desc">Mélange de légumes frais</div></div><div class="item-price">6,50</div></div>
+      </div>
+      <div class="card-tile-strip-bottom"></div>
+      <div class="card-foot"><span class="card-foot-dots">✦ &nbsp; ✦ &nbsp; ✦</span></div>
+    </div>
+  </section>
+
+  <!-- ════ PÂTISSERIES ════ -->
+  <section id="tab-patiss" class="menu-section">
+    <div class="menu-card">
+      <div class="card-head"><span class="card-head-label">Nousch · Menu</span><span class="card-head-gem">✦</span><span class="card-head-fa">نوش</span></div>
+      <div class="card-tile-strip"></div>
+      <div class="card-inner">
+        <div class="section-title-wrap">
+          <div class="section-title">🍮 Pâtisseries &amp; Desserts</div>
+          <div class="title-orn"><span>◆ ◆ ◆</span></div>
+        </div>
+        <div class="sub-label">Biscuits Persans</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Biscuit Nokhodchi</div><div class="item-desc">Biscuit persan à la farine de pois chiche</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Biscuit aux Noix</div><div class="item-desc">Biscuit traditionnel aux noix</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Biscuit Coco</div><div class="item-desc">Biscuit à la noix de coco</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Biscuit aux Raisins</div><div class="item-desc">Biscuit aux raisins secs</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Biscuit à la Confiture</div><div class="item-desc">Biscuit au cœur de confiture</div></div><div class="item-price">4,50</div></div>
+        <div class="sub-label">Pâtisseries</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Pâtisserie Zaban</div><div class="item-desc">Feuilleté sucré persan</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Choux à la Crème</div><div class="item-desc">Pâtisserie crème chantilly</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Gâteau Roulé</div><div class="item-desc">Roulé à la confiture</div></div><div class="item-price">4,50</div></div>
+        <div class="sub-label">Entremets Persans</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sholeh Zard</div><div class="item-desc">Riz au safran sucré</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Fereni</div><div class="item-desc">Crème de riz persane</div></div><div class="item-price">4,80</div></div>
+      </div>
+      <div class="card-tile-strip-bottom"></div>
+      <div class="card-foot"><span class="card-foot-dots">✦ &nbsp; ✦ &nbsp; ✦</span></div>
+    </div>
+  </section>
+
+  <!-- ════ MENU COMPLET ════ -->
+  <section id="tab-complet" class="menu-section">
+    <div class="menu-card">
+      <div class="card-head"><span class="card-head-label">Nousch · Menu Complet</span><span class="card-head-gem">✦</span><span class="card-head-fa">نوش</span></div>
+      <div class="card-tile-strip"></div>
+      <div class="card-inner">
+        <div class="section-title-wrap">
+          <div class="section-title">Menu Complet</div>
+          <div class="title-orn"><span>◆ ◆ ◆</span></div>
+        </div>
+
+        <div class="section-label-full">☕ Bar Chaud</div>
+        <div class="sub-label">Cafés &amp; Chocolat</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-tea"/></svg><div class="item-text"><div class="item-name">Espresso</div><div class="item-desc">Espresso italien classique</div></div><div class="item-price">2,40</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-tea"/></svg><div class="item-text"><div class="item-name">Americano</div><div class="item-desc">Espresso allongé à l'eau chaude</div></div><div class="item-price">3,20</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-tea"/></svg><div class="item-text"><div class="item-name">Cappuccino</div><div class="item-desc">Espresso avec mousse de lait</div></div><div class="item-price">4,20</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-tea"/></svg><div class="item-text"><div class="item-name">Latte</div><div class="item-desc">Espresso avec lait chaud crémeux</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-tea"/></svg><div class="item-text"><div class="item-name">Chocolat Chaud</div><div class="item-desc">Chocolat chaud onctueux</div></div><div class="item-price">4,80</div></div>
+        <div class="sub-label">Thés Persans</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Thé Noir Persan</div><div class="item-desc">Thé noir infusé traditionnel</div></div><div class="item-price">2,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Thé au Sucre Candi (Nabat)</div><div class="item-desc">Thé persan avec sucre candi</div></div><div class="item-price">3,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Thé au Safran</div><div class="item-desc">Thé parfumé au safran</div></div><div class="item-price">3,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Thé à la Cardamome</div><div class="item-desc">Thé noir parfumé à la cardamome</div></div><div class="item-price">3,20</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Thé à la Cannelle</div><div class="item-desc">Thé noir à la cannelle</div></div><div class="item-price">3,20</div></div>
+        <div class="sub-label">Infusions</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Infusion à la Menthe</div><div class="item-desc">Menthe séchée</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Infusion Verveine</div><div class="item-desc">Verveine citronnée</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Infusion Bourrache</div><div class="item-desc">Fleur de bourrache relaxante</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Infusion Relax</div><div class="item-desc">Mélange de plantes calmantes</div></div><div class="item-price">4,80</div></div>
+
+        <div class="section-label-full">🧊 Bar Froid</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Eau Minérale</div><div class="item-desc">Eau plate ou gazeuse</div></div><div class="item-price">2,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Soda</div><div class="item-desc">Coca / soda classique</div></div><div class="item-price">2,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sirop de Griotte</div><div class="item-desc">Boisson persane à la griotte</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sirop Citron</div><div class="item-desc">Boisson citron fraîche</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sirop Fleur d'Oranger</div><div class="item-desc">Boisson parfumée à la fleur d'oranger</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sirop Sekanjabin</div><div class="item-desc">Sirop persan menthe &amp; vinaigre</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sirop Bidmeshk</div><div class="item-desc">Sirop traditionnel persan</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Jus de Carotte Glacé</div><div class="item-desc">Jus de carotte avec glace</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Carotte Glacée (Bastani)</div><div class="item-desc">Jus de carotte avec glace au safran</div></div><div class="item-price">5,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Milkshakes Maison</div><div class="item-desc">Différents parfums</div></div><div class="item-price">5,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-drink"/></svg><div class="item-text"><div class="item-name">Mocktails Maison</div><div class="item-desc">Cocktails sans alcool</div></div><div class="item-price">6,50</div></div>
+
+        <div class="section-label-full">🫕 Petite Restauration</div>
+        <div class="sub-label">Plats Persans</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Kuku Sabzi</div><div class="item-desc">Omelette persane aux herbes</div></div><div class="item-price">9,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Kuku Sibzamini</div><div class="item-desc">Omelette persane aux pommes de terre</div></div><div class="item-price">9,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Sandwich Langue de Bœuf</div><div class="item-desc">Sandwich de langue de bœuf</div></div><div class="item-price">10,90</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Langue de Bœuf Mijotée</div><div class="item-desc">Plat de langue de bœuf</div></div><div class="item-price">10,90</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Mirza Ghasemi</div><div class="item-desc">Aubergines fumées, ail et œuf</div></div><div class="item-price">9,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Kashk Bademjan</div><div class="item-desc">Aubergines au yaourt fermenté</div></div><div class="item-price">9,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Falafel</div><div class="item-desc">Falafels avec sauce maison</div></div><div class="item-price">9,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Saucisse Bandari</div><div class="item-desc">Saucisse épicée persane</div></div><div class="item-price">10,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-plate"/></svg><div class="item-text"><div class="item-name">Kotlet Persan</div><div class="item-desc">Galette de viande et pommes de terre</div></div><div class="item-price">9,50</div></div>
+        <div class="sub-label">Accompagnements &amp; Salades</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Frites</div><div class="item-desc">Pommes de terre frites</div></div><div class="item-price">5,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Borani Aubergine</div><div class="item-desc">Yaourt et aubergine</div></div><div class="item-price">6,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Borani Épinard</div><div class="item-desc">Yaourt et épinard</div></div><div class="item-price">6,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Mast-o-Khiar</div><div class="item-desc">Yaourt au concombre et menthe</div></div><div class="item-price">6,00</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Salade Olivier Persane</div><div class="item-desc">Salade de pommes de terre et poulet</div></div><div class="item-price">8,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Salade Shirazi</div><div class="item-desc">Concombre, tomate, citron</div></div><div class="item-price">6,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-leaf"/></svg><div class="item-text"><div class="item-name">Salade de Saison</div><div class="item-desc">Mélange de légumes frais</div></div><div class="item-price">6,50</div></div>
+
+        <div class="section-label-full">🍮 Pâtisseries &amp; Desserts</div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Biscuit Nokhodchi</div><div class="item-desc">Biscuit persan à la farine de pois chiche</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Biscuit aux Noix</div><div class="item-desc">Biscuit traditionnel aux noix</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Biscuit Coco</div><div class="item-desc">Biscuit à la noix de coco</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Biscuit aux Raisins</div><div class="item-desc">Biscuit aux raisins secs</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Pâtisserie Zaban</div><div class="item-desc">Feuilleté sucré persan</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Choux à la Crème</div><div class="item-desc">Pâtisserie crème chantilly</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Gâteau Roulé</div><div class="item-desc">Roulé à la confiture</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-cake"/></svg><div class="item-text"><div class="item-name">Biscuit à la Confiture</div><div class="item-desc">Biscuit au cœur de confiture</div></div><div class="item-price">4,50</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Sholeh Zard</div><div class="item-desc">Riz au safran sucré</div></div><div class="item-price">4,80</div></div>
+        <div class="menu-item"><svg class="item-icon"><use href="#i-flower"/></svg><div class="item-text"><div class="item-name">Fereni</div><div class="item-desc">Crème de riz persane</div></div><div class="item-price">4,80</div></div>
+      </div>
+      <div class="card-tile-strip-bottom"></div>
+      <div class="card-foot"><span class="card-foot-dots">✦ &nbsp; ✦ &nbsp; ✦</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="fm">✦ &nbsp; ✦ &nbsp; ✦</span>
+    Tous nos prix sont en euros TTC · Service inclus
+    <br/>نوش جان &nbsp;—&nbsp; À votre santé
+  </footer>
+</div>
+</div>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
+  }
+</script>
+</body>
+</html>

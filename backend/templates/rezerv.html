@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <form method="post">
+        {% csrf_token %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation - Nousch</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+
+<div class="reservation-container">
+
+    <h1>Réserver une Table</h1>
+
+    <p>
+        Réservez votre table et profitez d'une expérience unique chez Nousch.
+    </p>
+
+    <form class="reservation-form">
+
+        <input type="text" name="name" placeholder="Nom complet">
+
+        <input type="tel" name="phone" placeholder="Téléphone">
+
+        <input type="date" name="date">
+
+        <input type="time" name=time>
+
+        <input type="number" name="gusts" placeholder="Nombre de personnes">
+
+        <button type="submit">
+            Réserver
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

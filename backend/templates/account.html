@@ -1,0 +1,15 @@
+
+<a href="/logout">
+    Sorti
+</a>
+<h1>Mon Rezerv</h1>
+{%for rezerv in rezervs%}
+<p>
+    {{rezerv.date}}
+    {{rezerv.time}}
+</p>
+{% endfor %}    
+<h1>Mon account</h1>
+{{user.first_name}}
+<br>
+{{user.email}}
