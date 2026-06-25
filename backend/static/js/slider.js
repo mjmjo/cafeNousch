@@ -45,16 +45,6 @@ function changeStorySlide() {
   storySlides[storyIndex].classList.add('active');
 }
 
-setInterval(changeStorySlide, 3000);
-
-const btn = document.getElementById("loginBtn");
-const modal = document.getElementById("modal");
-const close = document.getElementById("closeBtn");
-
-// باز کردن
-btn.onclick = () => {
-  modal.style.display = "flex";
-};
 
 // بستن
 close.onclick = () => {
@@ -107,3 +97,15 @@ function enterSite() {
   document.getElementById("welcomeScreen").style.display = "none";
 }
 
+const btn = document.getElementById("loginBtn");
+const menu = document.querySelector(".account-dropdown");
+
+btn.addEventListener("click", function(e){
+    e.preventDefault();
+
+    console.log("click");
+
+    menu.classList.toggle("show");
+
+    console.log(menu.classList);
+});

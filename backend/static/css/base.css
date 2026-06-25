@@ -2997,9 +2997,7 @@ font-style: italic;
 }
 
 /* وقتی موس رفت روی آیکون */
-.account:hover .account-dropdown {
-    display: block;
-}
+
 .account-dropdown a {
     display: block;
     padding: 14px 18px;
@@ -3012,11 +3010,6 @@ font-style: italic;
     transition: all 0.3s ease;
 }
 
-.account-dropdown a:hover {
-    background: rgba(199, 154, 91, 0.25);
-    color: #d9a760;
-    padding-left: 25px;
-}
 @keyframes menuFade {
     from {
         opacity: 0;
@@ -3027,22 +3020,7 @@ font-style: italic;
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.account-icon:hover {
-    background: rgba(199,154,91,0.35);
-    transform: scale(1.08);
-    box-shadow: 0 0 15px rgba(199,154,91,0.6);
-}
-
-
-
-
-
-.content {
-    position: relative;
-    height: 500px;
-}
+} 
 
 .image-hero1 {
     position: absolute;
@@ -3069,40 +3047,87 @@ font-style: italic;
     opacity: 0.9;
 }
 
-.account {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: white;
-}
-.top-right{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-.account{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    color:white;
-}
 
+
+.account-dropdown.show {
+    display: block;
+}
 .account-icon{
-    width:45px;
-    height:45px;
+    width:50px;
+    height:50px;
     border-radius:50%;
     background:rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
+
     display:flex;
-    justify-content:center;
     align-items:center;
-    flex-shrink:0;
+    justify-content:center;
+
     text-decoration:none;
+    font-size:24px;
     color:white;
-    font-size:20px;
+    cursor:pointer;
 }
 
-.account-name{
-    color:white;
-    font-size:14px;
+.account-dropdown{
+    display:none;
+}
+
+.account-dropdown.show{
+    display:block;
+}
+.account-icon{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+    font-size:24px;
+
+    background:rgba(255,255,255,0.15);
+
+    transition:all .3s ease;
+}
+
+.account-icon:hover{
+    transform:scale(1.1);
+    background:rgba(255,255,255,0.3);
+    cursor:pointer;
+}
+.account-dropdown a{
+    display:block;
+    padding:12px;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.account-dropdown a:hover{
+    background:rgba(255,255,255,.1);
+}
+.account-dropdown{
+    display:none;
+}
+
+.account-dropdown.show{
+    display:block !important;
+    position:absolute;
+    top:40px;
+    right:0;
+}
+.account{
+    position:relative;
+}
+
+.account-dropdown{
+    display:none;
+    position:absolute;
+    top:55px;
+    right:0;
+}
+
+.account:hover .account-dropdown{
+    display:block;
 }

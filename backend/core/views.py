@@ -4,6 +4,7 @@ from .models import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib import messages
 
 def home(request):
     return render(request, 'base.html')
@@ -46,7 +47,7 @@ def rezerv2(requst):
           tozih=requst.POST.get('tozih')
        
         )
-       
+    messages.success(requst,"Votre réservation a été enregistrée avec succès.") 
     return render(requst,"rezarve1.html")                 
 print("login viiiiw")
 def login_viwe(requst):
@@ -63,12 +64,13 @@ def login_viwe(requst):
         
         if user is not None:
             login(requst,user)
+            messages.success(requst,"Bienvenue ! Vous êtes connecté")
             print("REDIRECTING")
             return redirect("/")
         else:
             return render(requst,'login.html',{
                 "error":":("})
-            
+        messages.error(requst,"Nom d'utilisateur ou mot de passe incorrect")         
     return render(requst,"login.html")
 
 def singin(requst):
@@ -93,7 +95,9 @@ def singin(requst):
                 phone=phone
 
             )
-    
+            messages.success(requst, "Compte créé avec succès.")
+    else:
+            messages.error(requst, "Veuillez corriger les erreurs du formulaire.")
     return render(requst,'register.html')
 @login_required(login_url="login")
 def account(requst):

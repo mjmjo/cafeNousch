@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -15,14 +16,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title class="title">Café Nousch</title>
+  <title class="title">{% trans "Café Nousch" %}</title>
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
 </head>
 
 <div class="section-divider"></div>
 <body>
-  <div class="welcome-screen" id="welcomeScreen">
+  
 
 
 </div>
@@ -42,70 +43,70 @@
     </div>
 
     <div class="nav-links">
-      <a href="#">Accueil</a>
-      <a href="#">Notre Histoire</a>
+      <a href="#">{% trans "Accueil" %}</a>
+      <a href="#">{% trans "Notre Histoire" %}</a>
       
        <div class="dropdown">
-      <a href="#">Menu</a>
+      <a href="#">{% trans "Menu" %}</a>
 
       <div class="mega-menu">
         <div class="mega-column">
-          <h4>THÉS</h4>
-          <a href="#">Thé Noir</a>
-          <a href="#">Thé Vert</a>
-          <a href="#">Thé Safran</a>
-          <a href="#">Infusions</a>
+          <h4>{% trans "THÉS" %}</h4>
+          <a href="#">{%trans "Thé Noir" %}</a>
+          <a href="#">{%trans "Thé Vert" %}</a>
+          <a href="#">{%trans "Thé Safran" %}</a>
+          <a href="#">{%trans "Infusions" %}</a>
          
         </div>
 
         <div class="mega-column">
           
-          <h4>PÂTISSERIES</h4>
-          <a href="#">Baklava</a>
-          <a href="#">Cheesecake</a>
-          <a href="#">Croissant</a>
-          <a href="#">Macarons</a>
-          <a href="#">Desserts Persans</a>
+          <h4>{%trans "PÂTISSERIES" %}</h4>
+          <a href="#">{% trans "Baklava" %}</a>
+          <a href="#">{% trans "Cheesecake" %}</a>
+          <a href="#">{% trans "transCroissant" %}</a>
+          <a href="#">{% trans "Macarons" %}</a>
+          <a href="#">{% trans "Desserts Persans" %}</a>
         </div>
         <div class="mega-column">
-           <h4>Boissons Fraiches</h4>
+           <h4>{% trans "Boissons Fraiches" %}</h4>
          </div>
 
         <div class="mega-column">
-          <h4>SPÉCIALITÉS</h4>
-          <a href="#">Petit Déjeuner</a>
-          <a href="#">Brunch</a>
-          <a href="#">Déjeuner</a>
-          <a href="#">Cocktails Sans Alcool</a>
-          <a href="#">Signature Nousch</a>
+          <h4>{% trans "SPÉCIALITÉS" %}</h4>
+          <a href="#">{%trans "Petit Déjeuner" %}</a>
+          <a href="#">{%trans "Brunch" %}</a>
+          <a href="#">{%trans "Déjeuner" %}</a>
+          <a href="#">{%trans "Cocktails Sans Alcool" %}</a>
+          <a href="#">{%trans "Signature Nousch" %}</a>
         </div>
 
         <div class="mega-images">
           <div class="mega-card">
            <!--<img "{% static tea1.png" alt="">--> 
-            <h5>Thé Signature</h5>
-            <p>Notre sélection raffinée</p>
+            <h5>{%trans "Thé Signature" %}</h5>
+            <p>{%trans "Notre sélection raffinée" %}</p>
           </div>
 
           <div class="mega-card">
             <!--<img src="tea11.png" alt="">-->
-            <h5>Desserts</h5>
-            <p>Douceurs artisanales</p>
+            <h5>{%trans "Desserts" %}</h5>
+            <p>{%trans "Douceurs artisanales"%}</p>
           </div>
 
           <div class="mega-card">
            <!-- <img src="tea1.png" alt="">-->
-            <h5>Brunch</h5>
-            <p>Moments gourmands</p>
+            <h5>{%trans "Brunch" %}</h5>
+            <p>{%trans "Moments gourmands" %}</p>
           </div>
         </div>
       </div>
     </div>
 
-      <a href="#">Boutique</a>
+      <a href="#">{%trans "Boutique" %}</a>
       
-      <a href="#">Galerie</a>
-      <a href="#">Contact</a>
+      <a href="#">{%trans "Galerie" %}</a>
+      <a href="#">{%trans "Contact" %}</a>
     </div>
 
 <div class="top-search">
@@ -148,40 +149,21 @@
 <!-- دکمه لاگین -->
 <!--<div class="login-btn" id="loginBtn">👤</div>-->
 
-
 <div class="account">
 {% if user.is_authenticated %}
-<div class="account-icon">
-<a href=""class="account-icon" id="loginBtn">👤</a>
-{{user.first_name}}
-</div>
+
+<a href="#" class="account-icon" id="loginBtn">👤</a>
 
 <div class="account-dropdown">
-  <a href="{% url 'account' %}">
-            📅Mes Reservations
-        </a>
-
-    <a href="#">
-            🛒Mes commandes
-        </a>
-
-        <a href="#">
-            ⚙️Modifier
-        </a>
-
-        <a href="{% url 'logout' %}">
-            🚪 Sortir
-        </a>
-</a>
-{%else%}
-<a href="/login/",class="account-icon" id="loginBtn">👤</a>
-{%endif %}
-
+    <a href="{% url 'account' %}">📅 {%trans "Mes Reservations" %}</a>
+    <a href="#">🛒 {%trans "Mes commandes" %}</a>
+    <a href="#">⚙️ {%trans "Modifier" %}</a>
+    <a href="{% url 'logout' %}">🚪 {%trans "Sortir" %}</a>
 </div>
 
-</div>
-
-
+{% else %}
+<a href="/login/" class="account-icon">👤</a>
+{% endif %}
 </div>
 <!-- مودال -->
 <div class="modal" id="modal">
@@ -204,8 +186,8 @@
   <section class="hero-section">
 
     <div class="hero-content">
-      <span class="hero-subtitle">Café & Tea Experience</span>
-      <h1 class="h1-hero" >Bienvenue au Café Nousch</h1>
+      <span class="hero-subtitle">{%trans "Café & Tea Experience" %}</span>
+      <h1 class="h1-hero" >{%trans "Bienvenue au Café Nousch" %}</h1>
       <p>
         Découvrez une ambiance chaleureuse, des thés raffinés
         et une expérience unique inspirée par l’art Persan.
@@ -234,9 +216,9 @@
 </div>
 
       <div class="hero-buttons">
-        <a href="/menu/" class="btn-primary">Découvrir</a>
+        <a href="/menu/" class="btn-primary">{%trans "Découvrir"%}</a>
         <!--<a href="/re/" class="reservation-btn">Réserver une table</a>-->
-        <a href="/re/" class="btn-primary">Réserver une table</a>
+        <a href="/re/" class="btn-primary">{%trans "Réserver une table" %}</a>
       </div>
     </div>
   </section>
