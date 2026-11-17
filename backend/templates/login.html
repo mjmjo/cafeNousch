@@ -1,76 +1,237 @@
-{%load static%}
+{% load i18n %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" dir="ltr" id="htmlRoot" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NOUSCH — Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Connexion | Café Nousch</title>
+
+  <!-- فونت‌های لوکس فرانسوی و فارسی -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-</head>
-<body>
-  <main class="auth-shell">
-    <section class="brand-panel" aria-label="NOUSCH brand introduction">
-      <div class="steam"><i></i><i></i><i></i></div>
-      <div class="panel-top">
-        <div class="mark-mini">
-          <img src="{% static 'images/logo1.png' %}" alt="NOUSCH logo" />
-          <div><div class="mark-title">NOUSCH</div><div class="mark-sub">Café · Art · Cuisine</div></div>
-        </div>
-        <div class="mono">Lyon, France</div>
-      </div>
-      <div class="panel-center">
-        <div class="eyebrow">Member Access</div>
-        <h1 class="panel-title">Return to your<br><em>Parisian table.</em></h1>
-        <p class="panel-copy">Reserve your quiet corner, follow curated events, and keep your NOUSCH experience close — from morning espresso to evening gatherings.</p>
-        <div class="cafe-card">
-          <div><div class="metric">01</div><div class="metric-label">Private access</div></div>
-          <div><div class="metric">24h</div><div class="metric-label">Booking view</div></div>
-          <div><div class="metric">FR</div><div class="metric-label">Café culture</div></div>
-        </div>
-      </div>
-      <div class="panel-bottom">
-        <div class="mono address">contact@nousch.fr<br>© 2026 NOUSCH</div>
-        <nav class="socials mono" aria-label="Social links"><a href="#">Instagram</a><a href="#">TikTok</a></nav>
-      </div>
-    </section>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <section class="form-panel" aria-label="Login form">
-      <div class="auth-card">
-        <div class="mobile-logo"><img src="assets/nousch-b.png" alt="NOUSCH logo"><strong>NOUSCH</strong></div>
-        <div class="form-kicker">Secure Login</div>
-        <h2 class="form-title">Welcome back.</h2>
-        <p class="form-intro">Sign in with your email and password to continue to your NOUSCH account.</p>
-        <form method="post">
-          {% csrf_token %}  
-      <form class="auth-form" onsubmit="handleLogin(event)" novalidate>
-        {% csrf_token %}  
-        <div class="field" data-field="email">
-            <label for="email">Email address</label>
-            <div class="control"><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email"><span class="input-icon">@</span></div>
-            <div class="error-msg"></div>
-          </div>
-          <div class="field" data-field="password">
-            <label for="password">Password</label>
-            <div class="control"><input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password"><button class="password-toggle" type="button" onclick="togglePassword(this)">Show</button></div>
-            <div class="error-msg"></div>
-          </div>
-          <div class="form-row-small">
-            <label class="check"><input type="checkbox" name="remember"> Keep me signed in</label>
-            <a class="text-link" href="#">Forgot password?</a>
-          </div>
-          <button class="primary-btn" type="submit">Sign in</button>
-          <div class="toast" role="status"></div>
-        </form>
-        </form>
-        <div class="divider">or</div>
-        <p class="alt-action">New to NOUSCH? <a href="/register/">Create an account</a></p>
-     
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 950: '#0F1C3A', 900: '#1B305E', 800: '#243E78' },
+            gold: { 400: '#E6C35C', 500: '#D9B142', 600: '#B8912B' },
+            crimson: { 700: '#8E232A', 800: '#721A20' },
+            cream: { 50: '#FAF7F2', 100: '#F3EEE4', 200: '#E5DEC9' }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '"Vazirmatn"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .nousch-cream-pattern {
+      background-color: #F3EEE4;
+      background-image: radial-gradient(rgba(27, 48, 94, 0.08) 1px, transparent 1px),
+                        radial-gradient(rgba(217, 177, 66, 0.12) 1px, #F3EEE4 1px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+    .persian-arch {
+      border-radius: 9999px 9999px 24px 24px;
+    }
+  </style>
+</head>
+
+<body class="bg-navy-900 text-cream-100 font-sans antialiased selection:bg-gold-500 selection:text-navy-950 min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+  <!-- نوار هندسی چهاررنگ برند -->
+  <div class="fixed top-0 left-0 right-0 z-50 h-1.5 flex w-full shadow-sm">
+    <div class="bg-navy-950 flex-1"></div>
+    <div class="bg-crimson-700 w-16 sm:w-28"></div>
+    <div class="bg-gold-500 w-16 sm:w-28"></div>
+    <div class="bg-cream-100 w-16 sm:w-28"></div>
+    <div class="bg-crimson-700 w-16 sm:w-28"></div>
+    <div class="bg-navy-950 flex-1"></div>
+  </div>
+
+  <!-- هدر ساده و شیک -->
+  <header class="w-full pt-6 px-4 sm:px-8 flex justify-between items-center max-w-7xl mx-auto">
+    <a href="/" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+      <div class="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center bg-navy-900 border border-gold-500/50 rounded-xl p-1 shadow-inner group-hover:scale-105 transition duration-300 overflow-hidden relative">
+        <img src="{% static 'images/logo1.png' %}" alt="Café Nousch Logo" class="w-full h-full object-contain filter drop-shadow relative z-10">
       </div>
-    </section>
+      <div class="flex flex-col">
+        <span class="font-serif text-base sm:text-xl tracking-[0.1em] text-gold-500 font-bold leading-none">CAFÉ NOUSCH</span>
+        <span class="text-[8px] sm:text-[9px] tracking-[0.2em] text-cream-100/70 uppercase mt-0.5" data-i18n="subtitle">Lyon • Art Persan</span>
+      </div>
+    </a>
+
+    <!-- انتخابگر زبان -->
+    <div class="relative group z-50">
+      <button type="button" class="flex items-center gap-1.5 text-xs border border-gold-500/30 rounded-full px-3 py-1.5 bg-navy-900/95 text-cream-100 hover:border-gold-500 transition shadow-md">
+        <i class="fa-solid fa-globe text-gold-500 text-[11px]"></i>
+        <span id="currentLangLabel" class="font-semibold text-gold-400">FR</span>
+      </button>
+      <div class="hidden group-hover:block absolute right-0 mt-2 w-32 bg-navy-950 border border-gold-500/30 rounded-2xl shadow-2xl py-2 z-50">
+        <button onclick="setLanguage('fr')" class="w-full text-left px-4 py-2 text-xs text-cream-100 hover:bg-navy-900 hover:text-gold-400 transition">🇫🇷 Français</button>
+        <button onclick="setLanguage('en')" class="w-full text-left px-4 py-2 text-xs text-cream-100 hover:bg-navy-900 hover:text-gold-400 transition">🇬🇧 English</button>
+        <button onclick="setLanguage('de')" class="w-full text-left px-4 py-2 text-xs text-cream-100 hover:bg-navy-900 hover:text-gold-400 transition">🇩🇪 Deutsch</button>
+        <button onclick="setLanguage('fa')" class="w-full text-right px-4 py-2 text-xs text-cream-100 hover:bg-navy-900 hover:text-gold-400 transition">🇮🇷 فارسی</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- بخش اصلی فرم لاگین -->
+  <main class="flex-1 flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md bg-navy-950/95 border-2 border-gold-500/50 rounded-[2rem] shadow-2xl p-8 sm:p-10 backdrop-blur-xl relative overflow-hidden">
+      
+      <!-- هاله نور تزئینی در پس‌زمینه فرم -->
+      <div class="absolute -top-24 -right-24 w-48 h-48 bg-gold-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+      <div class="text-center mb-8 space-y-2">
+        <span class="text-gold-400 text-xs uppercase tracking-[0.25em]" data-i18n="login_kicker">Espace Client</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-cream-50" data-i18n="login_title">Connexion</h2>
+        <p class="text-xs text-cream-100/70" data-i18n="login_desc">Entrez vos identifiants pour accéder à votre compte.</p>
+      </div>
+
+      <!-- نمایش پیام‌های خطا یا موفقیت دیتابیس (در صورت وجود) -->
+      {% if form.errors %}
+        <div class="mb-6 p-3 bg-red-950/60 border border-red-500/50 rounded-xl text-xs text-red-200 text-center">
+          Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer.
+        </div>
+      {% endif %}
+
+      <!-- فرم لاگین با حفظ دقیق نام فیلدها و متد دیتابیس جنگو -->
+      <form method="POST" class="space-y-5">
+        {% csrf_token %}
+        
+        <div>
+          <label class="block text-[11px] uppercase tracking-wider text-gold-400/90 mb-1.5" data-i18n="lbl_username">Nom d'utilisateur / Email</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gold-500/60 text-xs">
+              <i class="fa-regular fa-user"></i>
+            </span>
+            <input type="text" name="username" required autocomplete="username" placeholder="Votre nom d'utilisateur" class="w-full pl-10 pr-4 py-3.5 rounded-xl bg-navy-900 border border-gold-500/30 text-cream-100 placeholder-cream-100/40 text-sm focus:outline-none focus:border-gold-500 transition shadow-inner">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] uppercase tracking-wider text-gold-400/90 mb-1.5" data-i18n="lbl_password">Mot de passe</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gold-500/60 text-xs">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+            <input type="password" name="password" required autocomplete="current-password" placeholder="••••••••" class="w-full pl-10 pr-4 py-3.5 rounded-xl bg-navy-900 border border-gold-500/30 text-cream-100 placeholder-cream-100/40 text-sm focus:outline-none focus:border-gold-500 transition shadow-inner">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-4 bg-crimson-700 hover:bg-crimson-800 text-white text-xs uppercase tracking-[0.2em] font-bold rounded-xl shadow-xl border border-gold-500/40 hover:scale-[1.02] transition duration-300 mt-2" data-i18n="btn_login">
+          Se connecter
+        </button>
+      </form>
+
+      <div class="mt-8 pt-6 border-t border-gold-500/20 text-center text-xs text-cream-100/70 space-y-2">
+        <p>
+          <span data-i18n="no_account">Vous n'avez pas de compte ?</span>
+          <a href="/register/" class="text-gold-400 font-semibold hover:underline ml-1" data-i18n="link_register">Créer un compte</a>
+        </p>
+        <p>
+          <a href="/" class="text-cream-100/60 hover:text-gold-400 transition" data-i18n="back_home">← Retour à l'accueil</a>
+        </p>
+      </div>
+
+    </div>
   </main>
-  <script src="{% static 'js/auth.js' %}"></script>
+
+  <!-- فوتر ساده -->
+  <footer class="w-full py-6 text-center text-xs text-cream-100/50 border-t border-gold-500/15">
+    © 2026 Café Nousch Lyon — Tous droits réservés.
+  </footer>
+
+  <!-- سیستم ترجمه زنده فریم‌ورک صفحه لاگین -->
+  <script>
+    const translations = {
+      fr: {
+        subtitle: "Lyon • Art Persan",
+        login_kicker: "Espace Client",
+        login_title: "Connexion",
+        login_desc: "Entrez vos identifiants pour accéder à votre compte.",
+        lbl_username: "Nom d'utilisateur",
+        lbl_password: "Mot de passe",
+        btn_login: "Se connecter",
+        no_account: "Vous n'avez pas de compte ?",
+        link_register: "Créer un compte",
+        back_home: "← Retour à l'accueil"
+      },
+      en: {
+        subtitle: "Lyon • Persian Art",
+        login_kicker: "Client Area",
+        login_title: "Login",
+        login_desc: "Enter your credentials to access your account.",
+        lbl_username: "Username",
+        lbl_password: "Password",
+        btn_login: "Sign In",
+        no_account: "Don't have an account?",
+        link_register: "Create account",
+        back_home: "← Back to home"
+      },
+      de: {
+        subtitle: "Lyon • Persische Kunst",
+        login_kicker: "Kundenbereich",
+        login_title: "Anmelden",
+        login_desc: "Geben Sie Ihre Anmeldedaten ein, um auf Ihr Konto zuzugreifen.",
+        lbl_username: "Benutzername",
+        lbl_password: "Passwort",
+        btn_login: "Anmelden",
+        no_account: "Haben Sie kein Konto?",
+        link_register: "Konto erstellen",
+        back_home: "← Zurück zur Startseite"
+      },
+      fa: {
+        subtitle: "لیون • هنر ایرانی",
+        login_kicker: "حساب کاربری",
+        login_title: "ورود به کافه نوش",
+        login_desc: "برای دسترسی به حساب کاربری خود وارد شوید.",
+        lbl_username: "نام کاربری",
+        lbl_password: "رمز عبور",
+        btn_login: "ورود به حساب",
+        no_account: "حساب کاربری ندارید؟",
+        link_register: "ثبت‌نام کنید",
+        back_home: "← بازگشت به صفحه اصلی"
+      }
+    };
+
+    function setLanguage(lang) {
+      document.getElementById('currentLangLabel').innerText = lang.toUpperCase();
+      const htmlRoot = document.getElementById('htmlRoot');
+      
+      if (lang === 'fa') {
+        htmlRoot.setAttribute('dir', 'rtl');
+        htmlRoot.setAttribute('lang', 'fa');
+      } else {
+        htmlRoot.setAttribute('dir', 'ltr');
+        htmlRoot.setAttribute('lang', lang);
+      }
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+      localStorage.setItem('nousch_lang', lang);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('nousch_lang') || 'fr';
+      setLanguage(savedLang);
+    });
+  </script>
 </body>
 </html>
