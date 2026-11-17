@@ -1,401 +1,582 @@
 {% load i18n %}
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr" id="htmlRoot" class="scroll-smooth">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Reem+Kufi+Fun:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Reem+Kufi+Fun:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title class="title">{% trans "Café Nousch" %}</title>
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <title id="pageTitle">Café Nousch | Élégance Franco-Persane</title>
 
+  <!-- فونت‌های اختصاصی لوکس -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 950: '#0F1C3A', 900: '#1B305E', 800: '#243E78' },
+            gold: { 400: '#E6C35C', 500: '#D9B142', 600: '#B8912B' },
+            crimson: { 700: '#8E232A', 800: '#721A20' },
+            cream: { 50: '#FAF7F2', 100: '#F3EEE4', 200: '#E5DEC9' }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '"Vazirmatn"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- فایل‌های CSS اختصاصی شما -->
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+  <style>
+    /* پس‌زمینه تزئین‌شده با لوگوی اصلی کافه نوش (مخصوص بخش‌های رزرو و منو) */
+    .nousch-logo-pattern {
+      background-color: #F3EEE4;
+      background-image: url("{% static 'images/logo1.png' %}");
+      background-repeat: repeat;
+      background-size: 70px 70px;
+      position: relative;
+    }
+    .nousch-logo-pattern::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(243, 238, 228, 0.94);
+      pointer-events: none;
+    }
+    .persian-arch { border-radius: 9999px 9999px 24px 24px; }
+    .story-slide { transition: opacity 1.2s ease-in-out; }
+    
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float {
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+  </style>
 </head>
 
-<div class="section-divider"></div>
-<body>
-  
+<body class="bg-navy-900 text-cream-100 font-sans antialiased selection:bg-gold-500 selection:text-navy-950 overflow-x-hidden">
 
-
-</div>
-<div class="persian-border"></div>
-</div>
-
-  
-<link href="https://fonts.cdnfonts.com/css/irannastaliq" rel="stylesheet">
+  <!-- نوار هندسی چهاررنگ بالای صفحه -->
+  <div class="fixed top-0 left-0 right-0 z-50 h-2.5 flex w-full shadow-lg">
+    <div class="bg-navy-950 flex-1"></div>
+    <div class="bg-crimson-700 w-20 sm:w-36 shadow-md"></div>
+    <div class="bg-gold-500 w-20 sm:w-36 shadow-md"></div>
+    <div class="bg-cream-100 w-20 sm:w-36 shadow-md"></div>
+    <div class="bg-crimson-700 w-20 sm:w-36 shadow-md"></div>
+    <div class="bg-navy-950 flex-1"></div>
   </div>
-<!-- Navbar -->
- <header class="hero-header">
 
-  <nav class="navbar">
-    
-    <div class="nav-logo">
-      <img src="{% static 'images/logo1.png' %}" alt='Logo'>
-    </div>
-
-    <div class="nav-links">
-      <a href="#">{% trans "Accueil" %}</a>
-      <a href="#">{% trans "Notre Histoire" %}</a>
+  <!-- هدر شیشه‌ای کاملاً ریسپانسیو و مدیریت‌شده برای جلوگیری از روی هم افتادن المان‌ها -->
+  <header class="fixed top-4 left-3 right-3 sm:left-6 sm:right-6 z-40">
+    <nav class="max-w-7xl mx-auto bg-navy-950/95 backdrop-blur-2xl border border-gold-500/40 rounded-2xl px-4 sm:px-6 h-18 flex items-center justify-between shadow-2xl">
       
-       <div class="dropdown">
-      <a href="#">{% trans "Menu" %}</a>
-
-      <div class="mega-menu">
-        <div class="mega-column">
-          <h4>{% trans "THÉS" %}</h4>
-          <a href="#">{%trans "Thé Noir" %}</a>
-          <a href="#">{%trans "Thé Vert" %}</a>
-          <a href="#">{%trans "Thé Safran" %}</a>
-          <a href="#">{%trans "Infusions" %}</a>
-         
+      <!-- لوگو و برند -->
+      <a href="/" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-navy-900 border border-gold-500/50 rounded-xl p-1 shadow-inner group-hover:scale-105 transition duration-300 overflow-hidden">
+          <img src="{% static 'images/logo1.png' %}" alt="Café Nousch Logo" class="w-full h-full object-contain filter drop-shadow">
         </div>
-
-        <div class="mega-column">
-          
-          <h4>{%trans "PÂTISSERIES" %}</h4>
-          <a href="#">{% trans "Baklava" %}</a>
-          <a href="#">{% trans "Cheesecake" %}</a>
-          <a href="#">{% trans "transCroissant" %}</a>
-          <a href="#">{% trans "Macarons" %}</a>
-          <a href="#">{% trans "Desserts Persans" %}</a>
+        <div class="flex flex-col">
+          <span class="font-serif text-base sm:text-xl tracking-[0.1em] text-gold-500 font-bold leading-none">CAFÉ NOUSCH</span>
+          <span class="text-[8px] sm:text-[9px] tracking-[0.2em] text-cream-100/70 uppercase mt-0.5" data-i18n="subtitle">Paris • Art Persan</span>
         </div>
-        <div class="mega-column">
-           <h4>{% trans "Boissons Fraiches" %}</h4>
-         </div>
+      </a>
 
-        <div class="mega-column">
-          <h4>{% trans "SPÉCIALITÉS" %}</h4>
-          <a href="#">{%trans "Petit Déjeuner" %}</a>
-          <a href="#">{%trans "Brunch" %}</a>
-          <a href="#">{%trans "Déjeuner" %}</a>
-          <a href="#">{%trans "Cocktails Sans Alcool" %}</a>
-          <a href="#">{%trans "Signature Nousch" %}</a>
-        </div>
+      <!-- منوی دسکتاپ -->
+      <div class="hidden xl:flex items-center gap-6 text-xs uppercase tracking-[0.15em] font-medium">
+        <a href="/" class="text-gold-500 hover:text-gold-400 transition" data-i18n="nav_home">Accueil</a>
+        <a href="#histoire" class="text-cream-100/80 hover:text-gold-500 transition" data-i18n="nav_story">Notre Histoire</a>
+        <a href="#menu" class="text-cream-100/80 hover:text-gold-500 transition" data-i18n="nav_menu">La Carte</a>
+        <a href="#reservation" class="text-cream-100/80 hover:text-gold-500 transition" data-i18n="nav_reserve">Réservation</a>
+      </div>
 
-        <div class="mega-images">
-          <div class="mega-card">
-           <!--<img "{% static tea1.png" alt="">--> 
-            <h5>{%trans "Thé Signature" %}</h5>
-            <p>{%trans "Notre sélection raffinée" %}</p>
+      <!-- کنترل‌های سمت چپ (زبان، اکانت، دکمه رزرو و منوی همبرگری) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        
+        <!-- منوی زبان -->
+        <div class="relative group">
+          <button type="button" class="flex items-center gap-1 text-xs border border-gold-500/40 rounded-full px-3 py-1.5 bg-navy-900/90 text-cream-100 hover:border-gold-500 transition">
+            <i class="fa-solid fa-globe text-gold-500 text-[10px]"></i>
+            <span id="currentLangLabel" class="font-semibold text-gold-400">FR</span>
+          </button>
+          <div class="hidden group-hover:block absolute right-0 mt-2 w-28 bg-navy-950 border border-gold-500/40 rounded-2xl shadow-2xl py-2 z-50">
+            <button onclick="setLanguage('fr')" class="w-full text-left px-3 py-1.5 text-xs text-cream-100 hover:bg-navy-900 hover:text-gold-400 transition">🇫🇷 Français</button>
+            <button onclick="setLanguage('en')" class="w-full text-left px-3 py-1.5 text-xs text-cream-100 hover:bg-navy-900 hover:text-gold-400 transition">🇬🇧 English</button>
+            <button onclick="setLanguage('de')" class="w-full text-left px-3 py-1.5 text-xs text-cream-100 hover:bg-navy-900 hover:text-gold-400 transition">🇩🇪 Deutsch</button>
+            <button onclick="setLanguage('fa')" class="w-full text-right px-3 py-1.5 text-xs text-cream-100 hover:bg-navy-900 hover:text-gold-400 transition">🇮🇷 فارسی</button>
           </div>
+        </div>
 
-          <div class="mega-card">
-            <!--<img src="tea11.png" alt="">-->
-            <h5>{%trans "Desserts" %}</h5>
-            <p>{%trans "Douceurs artisanales"%}</p>
-          </div>
+        <!-- اکانت کاربر -->
+        <div class="relative">
+          {% if user.is_authenticated %}
+            <button id="accountMenuBtn" type="button" class="w-9 h-9 rounded-full border border-gold-500/50 bg-navy-900 flex items-center justify-center text-gold-500 hover:bg-gold-500 hover:text-navy-950 transition shadow">
+              <i class="fa-regular fa-user text-xs"></i>
+            </button>
+            <div id="accountDropdown" class="hidden absolute right-0 mt-3 w-48 bg-navy-950 border border-gold-500/30 rounded-2xl shadow-2xl py-2 z-50">
+              <div class="px-3 py-2 border-b border-gold-500/15 text-xs text-gold-400 font-medium truncate">
+                {{ user.first_name|default:user.username }}
+              </div>
+              <a href="{% url 'account' %}" class="flex items-center gap-2 px-3 py-2 text-xs text-cream-100 hover:bg-navy-900 transition">
+                <i class="fa-regular fa-calendar text-gold-500"></i> <span data-i18n="acc_reservations">Mes Réservations</span>
+              </a>
+              <a href="{% url 'logout' %}" class="flex items-center gap-2 px-3 py-2 text-xs text-red-400 hover:bg-navy-900 transition">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> <span data-i18n="acc_logout">Déconnexion</span>
+              </a>
+            </div>
+          {% else %}
+            <a href="/login/" title="Connexion" class="w-9 h-9 rounded-full border border-gold-500/50 bg-navy-900 flex items-center justify-center text-gold-500 hover:bg-gold-500 hover:text-navy-950 transition shadow">
+              <i class="fa-regular fa-user text-xs"></i>
+            </a>
+          {% endif %}
+        </div>
 
-          <div class="mega-card">
-           <!-- <img src="tea1.png" alt="">-->
-            <h5>{%trans "Brunch" %}</h5>
-            <p>{%trans "Moments gourmands" %}</p>
+        <!-- دکمه رزرو -->
+        <a href="#reservation" class="hidden sm:inline-block bg-crimson-700 hover:bg-crimson-800 text-white text-[11px] uppercase tracking-wider font-semibold px-4 py-2 rounded-full shadow border border-gold-500/40 transition" data-i18n="btn_reserve_nav">
+          Réserver
+        </a>
+
+        <!-- دکمه منوی همبرگری (نمایش در تبلت و موبایل و دسکتاپ کوچک) -->
+        <button id="mobileMenuBtn" type="button" class="xl:hidden w-9 h-9 rounded-full border border-gold-500/40 bg-navy-900 flex items-center justify-center text-gold-500 hover:bg-gold-500 hover:text-navy-950 transition">
+          <i class="fa-solid fa-bars text-sm"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- منوی کشویی همبرگری -->
+    <div id="mobileMenu" class="hidden xl:hidden mt-2 bg-navy-950/98 backdrop-blur-2xl border border-gold-500/40 rounded-2xl p-4 shadow-2xl space-y-2 text-center">
+      <a href="/" class="block py-2 text-xs uppercase tracking-widest text-gold-400 font-semibold hover:bg-navy-900 rounded-xl transition" data-i18n="nav_home">Accueil</a>
+      <a href="#histoire" class="block py-2 text-xs uppercase tracking-widest text-cream-100/90 hover:text-gold-400 hover:bg-navy-900 rounded-xl transition" data-i18n="nav_story">Notre Histoire</a>
+      <a href="#menu" class="block py-2 text-xs uppercase tracking-widest text-cream-100/90 hover:text-gold-400 hover:bg-navy-900 rounded-xl transition" data-i18n="nav_menu">La Carte</a>
+      <a href="#reservation" class="block py-2 text-xs uppercase tracking-widest text-cream-100/90 hover:text-gold-400 hover:bg-navy-900 rounded-xl transition" data-i18n="nav_reserve">Réservation</a>
+    </div>
+  </header>
+
+  <!-- ۱. بخش هیرو (Hero Section) -->
+  <section class="relative pt-36 pb-20 sm:pt-44 sm:pb-32 bg-gradient-to-b from-navy-950 via-navy-900 to-navy-900 overflow-hidden">
+    <div class="absolute top-24 left-1/4 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-crimson-700/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+      
+      <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-navy-950/80 border border-gold-500/35 text-gold-400 text-[11px] tracking-[0.22em] uppercase shadow-md">
+          <span class="w-2 h-2 rounded-full bg-crimson-700 animate-pulse"></span>
+          <span data-i18n="hero_badge">Paris • Café &amp; Thé d'Art Persan</span>
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold text-cream-50 leading-[1.08]">
+          Café Nousch
+          <span class="block text-gold-500 italic font-medium text-2xl sm:text-5xl mt-3" data-i18n="hero_title_sub">
+            Élégance Franco-Persane
+          </span>
+        </h1>
+
+        <p class="text-cream-100/80 text-sm sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed" data-i18n="hero_desc">
+          Un sanctuaire contemporain où les arômes précieux du safran et de la rose de Kashan rencontrent le savoir-faire de la haute pâtisserie française.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-3">
+          <a href="#reservation" class="w-full sm:w-auto bg-crimson-700 hover:bg-crimson-800 text-white text-xs uppercase tracking-[0.18em] font-semibold px-8 py-4 rounded-full shadow-xl border border-gold-500/40 hover:scale-105 transition duration-300 text-center" data-i18n="btn_reserve_hero">
+            Réserver une table →
+          </a>
+          <a href="#menu" class="w-full sm:w-auto border border-gold-500/50 hover:bg-gold-500/10 text-gold-400 text-xs uppercase tracking-[0.18em] font-semibold px-8 py-4 rounded-full hover:scale-105 transition duration-300 text-center" data-i18n="btn_discover_menu">
+            Découvrir la carte
+          </a>
+        </div>
+      </div>
+
+      <!-- قاب هیرو -->
+      <div class="lg:col-span-5 flex justify-center animate-float">
+        <div class="relative w-72 sm:w-80 md:w-96">
+          <div class="absolute -inset-3 persian-arch border border-gold-500/40 pointer-events-none"></div>
+          <div class="relative persian-arch overflow-hidden border-2 border-gold-500/60 bg-navy-950 shadow-2xl">
+            <div class="h-72 sm:h-96 overflow-hidden relative">
+              <img src="{% static 'images/axasli.jpeg' %}" alt="Café Nousch Art" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent"></div>
+            </div>
+            <div class="p-5 text-center bg-navy-950 relative">
+              <p class="font-serif italic text-lg text-gold-400" data-i18n="hero_card_quote">« L'Art de Vivre »</p>
+              <p class="text-xs text-cream-100/70 mt-1 leading-relaxed" data-i18n="hero_card_desc">
+                L'harmonie des salons de thé persans et du chic parisien.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-      <a href="#">{%trans "Boutique" %}</a>
+    </div>
+  </section>
+
+  <!-- ۲. بخش درباره ما با پس‌زمینه پترن‌دار لوگو -->
+  <section id="histoire" class="nousch-logo-pattern text-navy-900 py-16 sm:py-28 border-y-4 border-gold-500/40 shadow-inner">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
       
-      <a href="#">{%trans "Galerie" %}</a>
-      <a href="#">{%trans "Contact" %}</a>
+      <div class="lg:col-span-6 relative flex justify-center">
+        <div class="relative w-full max-w-md">
+          <div class="persian-arch overflow-hidden border-4 border-navy-900/15 shadow-2xl h-72 sm:h-[420px] relative bg-navy-900">
+            <img src="{% static 'images/chay.jpg' %}" class="story-slide absolute inset-0 w-full h-full object-cover opacity-100" alt="Thé Persan">
+            <img src="{% static 'images/paris.jpg' %}" class="story-slide absolute inset-0 w-full h-full object-cover opacity-0" alt="Ambiance Parisienne">
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+        <span class="text-crimson-700 font-semibold text-xs uppercase tracking-[0.25em]" data-i18n="story_kicker">Notre Histoire</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-bold text-navy-900 leading-tight">
+          <span data-i18n="story_title_1">Entre Poésie Persane &amp;</span> <span class="italic text-crimson-700" data-i18n="story_title_2">Raffinement Parisien</span>
+        </h2>
+        <p class="text-navy-900/80 text-sm sm:text-lg leading-relaxed" data-i18n="story_p1">
+          Né de la passion pour l'hospitalité iranienne et l'élégance des cafés littéraires de Paris, le Café Nousch vous invite à un voyage sensoriel unique.
+        </p>
+        <p class="text-navy-900/75 text-xs sm:text-base leading-relaxed" data-i18n="story_p2">
+          Chaque tasse de thé infusé au safran et aux pétales de rose est préparée comme une œuvre d'art, accompagnée de pâtisseries fines.
+        </p>
+      </div>
+
     </div>
+  </section>
 
-<div class="top-search">
-  <button class="search-toggle">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-
-  <div class="search-panel">
-    <input type="text" placeholder="Tea, infusion, boutique..." />
-    <button class="search-btn">
-      <i class="fa-solid fa-arrow-right"></i>
-    </button>
-  </div>
-</div>
- 
-
-      
-   
-     
-    </button>
-
-   <div class="top-right">
-  
-  <!-- Language -->
-  <div class="lang">
-    <div class="lang-btn">
-      🌐 <span id="current-lang">FR</span>
-    </div>
-
-    <div class="lang-dropdown">
-      <div onclick="changeLang('FR')">🇫🇷 FR</div>
-      <div onclick="changeLang('EN')">🇬🇧 EN</div>
-      <div onclick="changeLang('DE')">🇩🇪 DE</div>
-      <div onclick="changeLang('FA')">🇮🇷 FA</div>
-    </div>
-  </div>
-
-  <!-- Login -->
-
-<!-- دکمه لاگین -->
-<!--<div class="login-btn" id="loginBtn">👤</div>-->
-
-<div class="account">
-{% if user.is_authenticated %}
-
-<a href="#" class="account-icon" id="loginBtn">👤</a>
-
-<div class="account-dropdown">
-    <a href="{% url 'account' %}">📅 {%trans "Mes Reservations" %}</a>
-    <a href="#">🛒 {%trans "Mes commandes" %}</a>
-    <a href="#">⚙️ {%trans "Modifier" %}</a>
-    <a href="{% url 'logout' %}">🚪 {%trans "Sortir" %}</a>
-</div>
-
-{% else %}
-<a href="/login/" class="account-icon">👤</a>
-{% endif %}
-</div>
-<!-- مودال -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-
-    <span class="close" id="closeBtn">&times;</span>
-
- 
-
-  
-      
-  </div>
-</div>
-
-  
-
-  </nav>
- 
-
-  <section class="hero-section">
-
-    <div class="hero-content">
-      <span class="hero-subtitle">{%trans "Café & Tea Experience" %}</span>
-      <h1 class="h1-hero" >{%trans "Bienvenue au Café Nousch" %}</h1>
-      <p>
-        Découvrez une ambiance chaleureuse, des thés raffinés
-        et une expérience unique inspirée par l’art Persan.
-      </p>
-    </div>   
-    
- <div class="content">
-   <div class="nav-actions">
-        <img src="{% static 'images/logo1.png' %}" class='image-hero1'>
-      </div>  
-
-    <!--<img src="{% static 'images/tea11.png' class='coffee-img' %}">-->
-  
-  </div>
-
-
-  <!--<div class="steam"></div>
-    <div class="steam"></div>
-  <div class="steam"></div>-->
-
-  <!-- Steam -->
-
-  <!-- Steam -->
- 
-  </div>
-</div>
-
-      <div class="hero-buttons">
-        <a href="/menu/" class="btn-primary">{%trans "Découvrir"%}</a>
-        <!--<a href="/re/" class="reservation-btn">Réserver une table</a>-->
-        <a href="/re/" class="btn-primary">{%trans "Réserver une table" %}</a>
+  <!-- ۳. بخش منو با iframe مجهز به پس‌زمینه پترن‌دار اختصاصی کافه نوش -->
+  <section id="menu" class="nousch-logo-pattern py-16 sm:py-28 relative border-b-4 border-gold-500/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-10 space-y-3">
+        <span class="text-crimson-700 font-semibold text-xs uppercase tracking-[0.25em]" data-i18n="menu_kicker">Menu interactif</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-bold text-navy-900" data-i18n="menu_title">Notre Carte</h2>
+        <p class="text-navy-900/70 text-sm" data-i18n="menu_desc">Explorez nos créations et notre sélection raffinée</p>
+      </div>
+      <!-- قاب iframe شیک با پس‌زمینه پترن‌دار و حاشیه طلایی لوکس -->
+      <div class="p-3 sm:p-5 rounded-[2rem] bg-navy-950/95 border-2 border-gold-500/60 shadow-2xl backdrop-blur-md">
+        <div class="w-full h-[600px] sm:h-[750px] rounded-2xl overflow-hidden bg-navy-900 border border-gold-500/30">
+          <iframe src="/menu/" class="w-full h-full border-none" title="Menu Frame"></iframe>
+        </div>
       </div>
     </div>
   </section>
 
-</header>
+  <!-- ۴. بخش رزرو میز با پس‌زمینه پترن‌دار لوگو -->
+  <section id="reservation" class="nousch-logo-pattern text-navy-900 py-16 sm:py-28 shadow-inner">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="bg-navy-950 text-cream-100 rounded-[2rem] overflow-hidden shadow-2xl border border-gold-500/40 grid grid-cols-1 lg:grid-cols-12">
+        
+        <div class="lg:col-span-5 relative min-h-[240px] bg-navy-900 p-6 sm:p-10 flex flex-col justify-between overflow-hidden">
+          <img src="{% static 'images/paris.jpg' %}" alt="Réservation" class="absolute inset-0 w-full h-full object-cover opacity-35">
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/60 to-navy-900/40"></div>
+          <div class="relative z-10">
+            <span class="inline-block px-3 py-1 rounded-full bg-gold-500/20 border border-gold-500/40 text-gold-400 text-[10px] uppercase tracking-widest shadow" data-i18n="res_badge">Salon Privé &amp; Terrasse</span>
+            <h3 class="font-serif text-2xl sm:text-4xl font-bold text-cream-50 mt-3 leading-tight" data-i18n="res_card_title">Réservez Votre Instant</h3>
+            <p class="text-xs text-cream-100/80 mt-2 leading-relaxed" data-i18n="res_card_desc">Pour un tea-time raffiné ou un brunch franco-persan, notre équipe vous accueille avec soin.</p>
+          </div>
+        </div>
 
+        <div class="lg:col-span-7 p-6 sm:p-12 bg-navy-950">
+          <h4 class="font-serif text-2xl sm:text-3xl text-gold-400 font-bold mb-1" data-i18n="res_form_title">Réserver une table</h4>
+          <p class="text-xs text-cream-100/60 mb-6" data-i18n="res_form_sub">Remplissez les informations ci-dessous pour confirmer votre venue.</p>
 
-</div>
-</div>
+          <form method="POST" action="/re/" class="space-y-4">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] uppercase tracking-wider text-gold-400/90 mb-1" data-i18n="lbl_name">Nom complet</label>
+                <input type="text" name="name" placeholder="Votre nom" required class="w-full px-4 py-3 rounded-xl bg-navy-900 border border-gold-500/30 text-cream-100 placeholder-cream-100/40 text-sm focus:outline-none focus:border-gold-500 transition">
+              </div>
+              <div>
+                <label class="block text-[11px] uppercase tracking-wider text-gold-400/90 mb-1" data-i18n="lbl_phone">Téléphone</label>
+                <input type="text" name="phone" placeholder="06 00 00 00 00" required class="w-full px-4 py-3 rounded-xl bg-navy-900 border border-gold-500/30 text-cream-100 placeholder-cream-100/40 text-sm focus:outline-none focus:border-gold-500 transition">
+              </div>
+            </div>
 
-</div>
-</div>
-    <!-- تصویر مرکزی 
-       <div class="hero-right">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-[11px] uppercase tracking-wider text-gold-400/90 mb-1" data-i18n="lbl_date">Date</label>
+                <input type="date" name="date" required class="w-full px-4 py-3 rounded-xl bg-navy-900 border border-gold-500/30 text-cream-100 text-sm focus:outline-none focus:border-gold-500 transition">
+              </div>
+              <div>
+                <label class="block text-[11px] uppercase tracking-wider text-gold-400/90 mb-1" data-i18n="lbl_time">Heure</label>
+                <input type="time" name="time" required class="w-full px-4 py-3 rounded-xl bg-navy-900 border border-gold-500/30 text-cream-100 text-sm focus:outline-none focus:border-gold-500 transition">
+              </div>
+              <div>
+                <label class="block text-[11px] uppercase tracking-wider text-gold-400/90 mb-1" data-i18n="lbl_guests">Personnes</label>
+                <input type="number" name="gusts" min="1" max="20" placeholder="2" required class="w-full px-4 py-3 rounded-xl bg-navy-900 border border-gold-500/30 text-cream-100 placeholder-cream-100/40 text-sm focus:outline-none focus:border-gold-500 transition">
+              </div>
+            </div>
 
-  <img src="paris.jpg" class="eiffel active">
-  <img src="paris2.jpg" class="eiffel">
-  <img src="paris5.jpg" class="eiffel">
-  <img src="imag.png" class="eiffel">
-  <img src="paris7.jpg" class="eiffel">
-  <img src="paris8.jpg" class="eiffel">
+            <div>
+              <label class="block text-[11px] uppercase tracking-wider text-gold-400/90 mb-1" data-i18n="lbl_note">Note particulière (Optionnel)</label>
+              <textarea name="tozih" rows="2" placeholder="Allergies, occasion spéciale..." class="w-full px-4 py-2 rounded-xl bg-navy-900 border border-gold-500/30 text-cream-100 placeholder-cream-100/40 text-sm focus:outline-none focus:border-gold-500 resize-none transition"></textarea>
+            </div>
 
-  
+            <button type="submit" class="w-full py-3.5 bg-crimson-700 hover:bg-crimson-800 text-white text-xs uppercase tracking-[0.2em] font-bold rounded-xl shadow-xl border border-gold-500/40 hover:scale-[1.02] transition duration-300 mt-2" data-i18n="btn_confirm_res">
+              Confirmer la réservation
+            </button>
+          </form>
+        </div>
 
-</div>-->
-
-
-<!-- About Section Placeholder -->
-<div class="story-image-slider">
-  <img src="{% static 'images/chay.jpg'%}" class='story-slide active' alt='Notre Histoire 1'>
-  <img src="{% static 'images/paris.jpg'%}" class='story-slide' alt='Notre Histoire 2'>
-  <img src="{% static 'images/paris2.jpg'%}" class='story-slide' alt='Notre Histoire 3'>
-
-</div>
-
-
-  </div>
-</section>
-
-<!-- Menu Section Placeholder -->
-<section id="menu" class="menu-section">
-  <div class="container"><br>
-    <h2>Menu</h2>
-  
-    <div class="qr-code">
-      <!--<h2>Menu</h2>-->
-     <div class="menu-frame">
- <iframe src="menu/" frameborder="0"></iframe>
-
-     </div>
-      <!--<p>Scannez pour accéder au menu complet</p>-->
+      </div>
     </div>
-    <div class="menu-items"></div>
-  </div>
-</section>
+  </section>
 
-<!-- Blog Section Placeholder -->
-<section id="blog" class="blog-section">
-  <div class="container">
-    <h2>Blog</h2>
-    <p>Articles et actualités du café</p>
-  </div>
-</section>
-
-<!-- Boutique Section Placeholder -->
-<section class="boutique-section">
-  <h2 class="boutique-title">Boutique</h2>
-
-  <div class="boutique-grid">
-{%for mahsol in products %}
-    <div class="product-card">
-      <img class="image-botic" src="{{ mahsol.image.url }}",with="100px">
-      <a href="Nosche/{{mahsol.id}}/">
-      <h2>{{mahsol.name}}</h2>
-      
-      </a>
-      <p>{{mahsol.description}}</p>
-      <h3>{{mahsol.price}}$</h3>
-    
-  
-        <div class="product-bottom">
-          <input type="number" value="1" min="1">
-          <button>Ajouter</button>
+  <!-- ۵. فوتر -->
+  <footer class="bg-navy-950 text-cream-100 pt-16 pb-10 border-t border-gold-500/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+      <div class="space-y-4">
+        <span class="font-serif text-2xl font-bold tracking-widest text-gold-500">CAFÉ NOUSCH</span>
+        <p class="text-xs text-cream-100/70 leading-relaxed max-w-xs" data-i18n="footer_desc">L'art du thé persan et la finesse de la pâtisserie française réunis dans un écrin chaleureux.</p>
+      </div>
+      <div>
+        <h4 class="font-serif text-gold-400 text-lg mb-4" data-i18n="footer_nav">Navigation</h4>
+        <ul class="space-y-2 text-xs text-cream-100/75">
+          <li><a href="/" class="hover:text-gold-400 transition" data-i18n="nav_home">Accueil</a></li>
+          <li><a href="#histoire" class="hover:text-gold-400 transition" data-i18n="nav_story">Notre Histoire</a></li>
+          <li><a href="#menu" class="hover:text-gold-400 transition" data-i18n="nav_menu">La Carte</a></li>
+          <li><a href="#reservation" class="hover:text-gold-400 transition" data-i18n="nav_reserve">Réservation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-serif text-gold-400 text-lg mb-4" data-i18n="footer_social">Suivez-nous</h4>
+        <div class="flex gap-3.5">
+          <a href="https://www.instagram.com/nousch.fr?igsh=cmc5bXc5OW45M2gy" target="_blank" title="Instagram" class="w-10 h-10 rounded-full bg-navy-900 border border-gold-500/30 flex items-center justify-center text-cream-100 hover:bg-crimson-700 hover:scale-110 transition duration-300 shadow"><i class="fab fa-instagram"></i></a>
+          <a href="https://whatsapp.com" target="_blank" title="WhatsApp" class="w-10 h-10 rounded-full bg-navy-900 border border-gold-500/30 flex items-center justify-center text-cream-100 hover:bg-emerald-700 hover:scale-110 transition duration-300 shadow"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://telegram.org" target="_blank" title="Telegram" class="w-10 h-10 rounded-full bg-navy-900 border border-gold-500/30 flex items-center justify-center text-cream-100 hover:bg-sky-600 hover:scale-110 transition duration-300 shadow"><i class="fab fa-telegram-plane"></i></a>
+          <a href="https://twitter.com" target="_blank" title="X (Twitter)" class="w-10 h-10 rounded-full bg-navy-900 border border-gold-500/30 flex items-center justify-center text-cream-100 hover:bg-gray-700 hover:scale-110 transition duration-300 shadow"><i class="fab fa-x-twitter"></i></a>
         </div>
       </div>
-    
-   
-{% endfor %}
-</section>
-
-<!-- Reservation Section Placeholder -->
-<section id="reservation" class="reservation-section">
- 
-  <div class="container">
-    <h2>Réservation & Commande</h2>
-    <div class="reservation-card">
-      <h3>Réserver une table</h3>
-      <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="name" placeholder="Votre nom" required>
-        <input type="text" name="phone" placeholder="Votre numéro" required>
-        <input type="date" name="date" required>
-        <input type="time" name="time" required>
-        <input type="number" name="guests" placeholder="Nombre de personnes" required>
-        <button type="submit">Envoyer</button>
-      </form>
     </div>
-
-    <div class="reservation-card">
-      <h3>Commander du café</h3>
-      <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="name" placeholder="Votre nom" required>
-        <input type="text" name="phone" placeholder="Votre numéro" required>
-        <select name="coffee_type">
-          <option value="espresso">Espresso</option>
-          <option value="latte">Latte</option>
-          <option value="cappuccino">Cappuccino</option>
-        </select>
-        <input type="number" name="quantity" placeholder="Quantité" required>
-        <textarea name="note" placeholder="Notes supplémentaires"></textarea>
-        <button type="submit">Envoyer</button>
-      </form>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-6 border-t border-gold-500/15 text-center text-xs text-cream-100/50">
+      © 2026 Café Nousch — Tous droits réservés.
     </div>
-  </div>
-</section>
-<script src="{% static 'js/slider.js' %}">
+  </footer>
 
-</script>
-<footer class="site-footer">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <div class="footer-container">
+  <!-- سیستم ترجمه و تعاملات -->
+  <script>
+    const translations = {
+      fr: {
+        subtitle: "Paris • Art Persan",
+        nav_home: "Accueil",
+        nav_story: "Notre Histoire",
+        nav_menu: "La Carte",
+        nav_reserve: "Réservation",
+        btn_reserve_nav: "Réserver",
+        acc_reservations: "Mes Réservations",
+        acc_logout: "Déconnexion",
+        hero_badge: "Paris • Café & Thé d'Art Persan",
+        hero_title_sub: "Élégance Franco-Persane",
+        hero_desc: "Un sanctuaire contemporain où les arômes précieux du safran et de la rose de Kashan rencontrent le savoir-faire de la haute pâtisserie française.",
+        btn_reserve_hero: "Réserver une table →",
+        btn_discover_menu: "Découvrir la carte",
+        hero_card_quote: "« L'Art de Vivre »",
+        hero_card_desc: "L'harmonie des salons de thé persans et du chic parisien.",
+        story_kicker: "Notre Histoire",
+        story_title_1: "Entre Poésie Persane &",
+        story_title_2: "Raffinement Parisien",
+        story_p1: "Né de la passion pour l'hospitalité iranienne et l'élégance des cafés littéraires de Paris, le Café Nousch vous invite à un voyage sensoriel unique.",
+        story_p2: "Chaque tasse de thé infusé au safran et aux pétales de rose est préparée comme une œuvre d'art, accompagnée de pâtisseries fines.",
+        menu_kicker: "Menu interactif",
+        menu_title: "Notre Carte",
+        menu_desc: "Explorez nos créations et notre sélection raffinée",
+        res_badge: "Salon Privé & Terrasse",
+        res_card_title: "Réservez Votre Instant",
+        res_card_desc: "Pour un tea-time raffiné ou un brunch franco-persan, notre équipe vous accueille avec soin.",
+        res_form_title: "Réserver une table",
+        res_form_sub: "Remplissez les informations ci-dessous pour confirmer votre venue.",
+        lbl_name: "Nom complet",
+        lbl_phone: "Téléphone",
+        lbl_date: "Date",
+        lbl_time: "Heure",
+        lbl_guests: "Personnes",
+        lbl_note: "Note particulière (Optionnel)",
+        btn_confirm_res: "Confirmer la réservation",
+        footer_desc: "L'art du thé persan et la finesse de la française réunis dans un écrin chaleureux.",
+        footer_nav: "Navigation",
+        footer_social: "Suivez-nous"
+      },
+      en: {
+        subtitle: "Paris • Persian Art",
+        nav_home: "Home",
+        nav_story: "Our Story",
+        nav_menu: "Menu",
+        nav_reserve: "Reservation",
+        btn_reserve_nav: "Book Table",
+        acc_reservations: "My Bookings",
+        acc_logout: "Logout",
+        hero_badge: "Paris • Persian Art Café & Tea",
+        hero_title_sub: "Franco-Persian Elegance",
+        hero_desc: "A contemporary sanctuary where the precious aromas of saffron and Kashan rose meet the expertise of French haute patisserie.",
+        btn_reserve_hero: "Book a Table →",
+        btn_discover_menu: "Discover Menu",
+        hero_card_quote: "“The Art of Living”",
+        hero_card_desc: "The harmony of Persian tea salons and Parisian chic.",
+        story_kicker: "Our Story",
+        story_title_1: "Between Persian Poetry &",
+        story_title_2: "Parisian Refinement",
+        story_p1: "Born from a passion for Iranian hospitality and the elegance of Parisian literary cafés, Café Nousch invites you on a unique sensory journey.",
+        story_p2: "Each cup of tea infused with saffron and rose petals is prepared like a work of art, accompanied by fine pastries.",
+        menu_kicker: "Interactive Menu",
+        menu_title: "Our Menu",
+        menu_desc: "Explore our creations and refined selection",
+        res_badge: "Private Lounge & Terrasse",
+        res_card_title: "Book Your Moment",
+        res_card_desc: "For a refined tea-time or a Franco-Persian brunch, our team welcomes you with care.",
+        res_form_title: "Book a Table",
+        res_form_sub: "Fill in the information below to confirm your visit.",
+        lbl_name: "Full Name",
+        lbl_phone: "Phone",
+        lbl_date: "Date",
+        lbl_time: "Time",
+        lbl_guests: "Guests",
+        lbl_note: "Special Note (Optional)",
+        btn_confirm_res: "Confirm Reservation",
+        footer_desc: "The art of Persian tea and the finesse of French pastry united in a warm setting.",
+        footer_nav: "Navigation",
+        footer_social: "Follow Us"
+      },
+      de: {
+        subtitle: "Paris • Persische Kunst",
+        nav_home: "Startseite",
+        nav_story: "Über Uns",
+        nav_menu: "Speisekarte",
+        nav_reserve: "Reservierung",
+        btn_reserve_nav: "Tisch Reservieren",
+        acc_reservations: "Meine Reservierungen",
+        acc_logout: "Abmelden",
+        hero_badge: "Paris • Persisches Kunst-Café & Tee",
+        hero_title_sub: "Franco-Persische Eleganz",
+        hero_desc: "Ein zeitgenössischer Zufluchtsort, in dem die wertvollen Aromen von Safran und Kaschahn-Rose auf französische Pâtisserie-Kunst treffen.",
+        btn_reserve_hero: "Tisch reservieren →",
+        btn_discover_menu: "Karte entdecken",
+        hero_card_quote: "„Die Kunst des Lebens“",
+        hero_card_desc: "Die Harmonie persischer Tesaons und pariser Chic.",
+        story_kicker: "Unsere Geschichte",
+        story_title_1: "Zwischen persischer Poesie &",
+        story_title_2: "Pariser Raffinesse",
+        story_p1: "Aus der Leidenschaft für iranische Gastfreundschaft und Pariser Café-Kultur entstanden, lädt das Café Nousch zu einer sinnlichen Reise ein.",
+        story_p2: "Jede Tasse Tee mit Safran und Rosenblüten wird wie ein Kunstwerk zubereitet.",
+        menu_kicker: "Interaktives Menü",
+        menu_title: "Unsere Speisekarte",
+        menu_desc: "Entdecken Sie unsere Kreationen und erlesene Auswahl",
+        res_badge: "Private Lounge & Terrasse",
+        res_card_title: "Reservieren Sie Ihren Moment",
+        res_card_desc: "Für einen erlesenen Teatime oder Brunch erwartet Sie unser Team mit Sorgfalt.",
+        res_form_title: "Tisch reservieren",
+        res_form_sub: "Füllen Sie die folgenden Daten aus, um Ihren Besuch zu bestätigen.",
+        lbl_name: "Vollständiger Name",
+        lbl_phone: "Telefon",
+        lbl_date: "Datum",
+        lbl_time: "Uhrzeit",
+        lbl_guests: "Gäste",
+        lbl_note: "Besondere Notiz (Optional)",
+        btn_confirm_res: "Reservierung bestätigen",
+        footer_desc: "Die Kunst des persischen Tees und die Finesse der französischen Pâtisserie in warmem Ambiente.",
+        footer_nav: "Navigation",
+        footer_social: "Folgen Sie uns"
+      },
+      fa: {
+        subtitle: "پاریس • هنر ایرانی",
+        nav_home: "صفحه اصلی",
+        nav_story: "داستان ما",
+        nav_menu: "منو و کارت",
+        nav_reserve: "رزرو میز",
+        btn_reserve_nav: "رزرو میز",
+        acc_reservations: "رزروهای من",
+        acc_logout: "خروج",
+        hero_badge: "پاریس • کافه و چایخانه هنر پارسی",
+        hero_title_sub: "شکوه تلفیق فرانسوی و ایرانی",
+        hero_desc: "پناهگاهی معاصر که عطر اصیل زعفران و گل سرخ کاشان با هنر قنادی لوکس فرانسه در آن به هم می‌رسند.",
+        btn_reserve_hero: "رزرو آنلاین میز ←",
+        btn_discover_menu: "مشاهده منو",
+        hero_card_quote: "« هنر زندگی »",
+        hero_card_desc: "هارمونی اصیل سالن‌های چای ایرانی و شیک‌پ پاریسی.",
+        story_kicker: "داستان ما",
+        story_title_1: "میان شعر پارسی و",
+        story_title_2: "ظرافت پاریسی",
+        story_p1: "برخاسته از عشق به مهمان‌نوازی ایرانی و اصالت کافه‌های پاریس، کافه نوش شما را به سفری حسی و بی‌نظیر دعوت می‌کند.",
+        story_p2: "هر فنجان چای با عطر زعفران و گلبرگ‌های سرخ، همچون اثری هنری با شیرینی‌های دست‌ساز سرو می‌شود.",
+        menu_kicker: "منوی تعاملی",
+        menu_title: "منوی کافه نوش",
+        menu_desc: "مجموعه‌ای از بهترین نوشیدنی‌ها و دسرهای دست‌ساز",
+        res_badge: "سالن اختصاصی و تراس",
+        res_card_title: "لحظات خود را رزرو کنید",
+        res_card_desc: "برای یک عصرانه دلنشین یا برانچ فرانسوی-پارسی، با افتخار میزبان شما هستیم.",
+        res_form_title: "رزرو میز",
+        res_form_sub: "لطفاً اطلاعات زیر را برای تأیید رزرو خود وارد کنید.",
+        lbl_name: "نام و نام خانوادگی",
+        lbl_phone: "شماره تماس",
+        lbl_date: "تاریخ",
+        lbl_time: "ساعت",
+        lbl_guests: "تعداد مهمانان",
+        lbl_note: "توضیحات تکمیلی (اختیاری)",
+        btn_confirm_res: "تأیید و ثبت رزرو",
+        footer_desc: "هنر چای اصیل پارسی و ظرافت قنادی فرانسوی در فضایی گرم و دلنشین.",
+        footer_nav: "دسترسی سریع",
+        footer_social: "ما را دنبال کنید"
+      }
+    };
 
-    <div class="footer-column">
-      <h3>CAFÉ NOUSCH</h3>
-      <a href="#">Notre Histoire</a>
-      <a href="#">Notre Menu</a>
-      <a href="#">Réservation</a>
-      <a href="#">Boutique</a>
-      <a href="#">Galerie</a>
-    </div>
+    function setLanguage(lang) {
+      document.getElementById('currentLangLabel').innerText = lang.toUpperCase();
+      const htmlRoot = document.getElementById('htmlRoot');
+      
+      if (lang === 'fa') {
+        htmlRoot.setAttribute('dir', 'rtl');
+        htmlRoot.setAttribute('lang', 'fa');
+      } else {
+        htmlRoot.setAttribute('dir', 'ltr');
+        htmlRoot.setAttribute('lang', lang);
+      }
 
-    <div class="footer-column">
-      <h3>BOUTIQUE</h3>
-      <a href="#">Thés</a>
-      <a href="#">Infusions</a>
-      <a href="#">Tasses</a>
-      <a href="#">Cadeaux</a>
-      <a href="#">Collections</a>
-    </div>
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+      localStorage.setItem('nousch_lang', lang);
+    }
 
-    <div class="footer-column">
-      <h3>À PROPOS</h3>
-      <a href="#">Contact</a>
-      <a href="#">FAQ</a>
-      <a href="#">Livraison</a>
-      <a href="#">Politique de confidentialité</a>
-      <a href="#">Conditions générales</a>
-    </div>
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('nousch_lang') || 'fr';
+      setLanguage(savedLang);
+    });
 
-    <div class="footer-column">
-      <h3>Suivez-nous</h3>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
 
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
-        <a href="#"><i class="fab fa-telegram-plane"></i></a>
-        <a href="https://www.instagram.com/nousch.fr?igsh=cmc5bXc5OW45M2gy"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-      </div>
-    </div>
+    const accountMenuBtn = document.getElementById('accountMenuBtn');
+    const accountDropdown = document.getElementById('accountDropdown');
+    if (accountMenuBtn && accountDropdown) {
+      accountMenuBtn.addEventListener('click', () => {
+        accountDropdown.classList.toggle('hidden');
+      });
+    }
 
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2026 Café Nousch — Tous droits réservés</p>
-  </div>
-</footer>
+    const slides = document.querySelectorAll('.story-slide');
+    let currentSlide = 0;
+    if (slides.length > 1) {
+      setInterval(() => {
+        slides[currentSlide].classList.remove('opacity-100');
+        slides[currentSlide].classList.add('opacity-0');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.remove('opacity-0');
+        slides[currentSlide].classList.add('opacity-100');
+      }, 5000);
+    }
+  </script>
 </body>
 </html>
-
